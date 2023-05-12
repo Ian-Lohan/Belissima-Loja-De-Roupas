@@ -5,3 +5,7 @@ Outra vantagem do uso de sistemas de banco de dados no gerenciamento de estoque 
 Além disso, o uso de sistemas de banco de dados também pode permitir a criação de relatórios personalizados e gráficos que podem ajudar na tomada de decisões informadas sobre o estoque. Kroenke e Auer (2010) destacam que os relatórios podem incluir informações como histórico de vendas, análise de tendências e dados de inventário, que podem ser usados para prever a demanda futura e tomar decisões informadas sobre o estoque.
 
 Em resumo, o uso de sistemas de banco de dados no gerenciamento de estoque pode trazer muitos benefícios para as empresas, incluindo a melhoria da eficiência do gerenciamento de estoque, maior segurança e integridade dos dados e a capacidade de criar relatórios personalizados e gráficos para ajudar na tomada de decisões informadas. Essas vantagens foram discutidas por autores como Kroenke e Auer e Connolly e Begg, que exploraram o papel dos sistemas de banco de dados no gerenciamento de negócios.
+
+
+Kroenke, D. M., & Auer, D. J. (2010). Database concepts (5th ed.). Prentice Hall.
+Connolly, T., & Begg, C. (2014). Database systems: A practical approach to design, implementation, and management (6th ed.). Pearson Education.
