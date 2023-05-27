@@ -15,8 +15,6 @@ public class MySQLConnection {
             conn = DriverManager.getConnection(url, username, password);
             System.out.println("Conexão bem-sucedida!");
 
-            // Faça outras operações no banco de dados aqui...
-
         } catch (SQLException e) {
             System.out.println("Erro ao conectar ao banco de dados: " + e.getMessage());
         } finally {
