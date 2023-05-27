@@ -35,6 +35,7 @@ public class LoginView extends JFrame {
     }
 
     public LoginView() {
+    	setTitle("Belissima - Login");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 300, 200);
         getContentPane().setLayout(null);
@@ -57,8 +58,29 @@ public class LoginView extends JFrame {
         getContentPane().add(passwordField);
 
         JButton btnLogin = new JButton("Login");
-        btnLogin.setBounds(120, 120, 80, 30);
+        btnLogin.setBounds(171, 122, 99, 30);
         getContentPane().add(btnLogin);
+        
+        JButton btnCadastrar = new JButton("Cadastrar");
+        btnCadastrar.setBounds(30, 122, 99, 30);
+        getContentPane().add(btnCadastrar);
+        
+        btnCadastrar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                EventQueue.invokeLater(new Runnable() {
+                    public void run() {
+                        try {
+                            CadastroView frame = new CadastroView();
+                            frame.setVisible(true);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+
+                dispose();
+            }
+        });
 
         btnLogin.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -68,11 +90,26 @@ public class LoginView extends JFrame {
                 if (validarLogin(login, senha)) {
                     // Login válido
                     JOptionPane.showMessageDialog(LoginView.this, "Login bem-sucedido!");
-                    // Faça o redirecionamento para a próxima tela ou execute outras ações necessárias
+
+                    // Criar e exibir o MenuView
+                    EventQueue.invokeLater(new Runnable() {
+                        public void run() {
+                            try {
+                                MenuView frame = new MenuView();
+                                frame.setVisible(true);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+
+                    // Fechar a janela de login
+                    dispose();
                 } else {
                     // Login inválido
                     JOptionPane.showMessageDialog(LoginView.this, "Login ou senha inválidos!");
                 }
+
             }
         });
     }
