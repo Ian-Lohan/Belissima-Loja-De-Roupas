@@ -1,127 +1,167 @@
 package view;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import dal.ClienteDAL;
+import dao.Cliente;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JTable;
-import javax.swing.JScrollPane;
-
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.List;
+
+import connections.Conexao;
 
 public class ClientesView extends JFrame {
-
-    private JPanel contentPane;
     private JTable table;
+    private DefaultTableModel tableModel;
+    private ClienteDAL clienteDAL;
 
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    ClientesView frame = new ClientesView();
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
+    public ClientesView() {
+        setTitle("Tabela de Clientes");
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setSize(800, 400);
+        setLocationRelativeTo(null);
+
+        tableModel = new DefaultTableModel();
+        tableModel.addColumn("ID");
+        tableModel.addColumn("Nome");
+        tableModel.addColumn("CPF");
+        tableModel.addColumn("Número");
+        tableModel.addColumn("Endereço");
+
+        table = new JTable(tableModel);
+        JScrollPane scrollPane = new JScrollPane(table);
+        getContentPane().add(scrollPane, BorderLayout.CENTER);
+
+        JPanel buttonPanel = new JPanel();
+        getContentPane().add(buttonPanel, BorderLayout.SOUTH);
+
+        JButton addButton = new JButton("Adicionar");
+        buttonPanel.add(addButton);
+
+        JButton editButton = new JButton("Editar");
+        buttonPanel.add(editButton);
+
+        JButton deleteButton = new JButton("Deletar");
+        buttonPanel.add(deleteButton);
+
+        addButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                AddClienteView addClienteView = new AddClienteView();
+                addClienteView.setVisible(true);
+                addClienteView.addWindowListener(new WindowAdapter() {
+                    @Override
+                    public void windowClosed(WindowEvent e) {
+                        refreshTable();
+                    }
+                });
+            }
+        });
+
+        editButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int selectedRow = table.getSelectedRow();
+                if (selectedRow != -1) {
+                    int clienteId = (int) table.getValueAt(selectedRow, 0);
+
+                    try {
+                        Connection conn = Conexao.ConectarBanco();
+                        clienteDAL = new ClienteDAL(conn);
+                        Cliente cliente = clienteDAL.obterCliente(clienteId);
+                        conn.close();
+
+                        if (cliente != null) {
+                            EdtClienteView edtClienteView = new EdtClienteView(cliente);
+                            edtClienteView.setVisible(true);
+                            edtClienteView.addWindowListener(new WindowAdapter() {
+                                @Override
+                                public void windowClosed(WindowEvent e) {
+                                    refreshTable();
+                                }
+                            });
+                        } else {
+                            JOptionPane.showMessageDialog(ClientesView.this, "Cliente não encontrado!");
+                        }
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(ClientesView.this, "Selecione um cliente para editar!");
                 }
             }
         });
-    }
 
-    public ClientesView() {
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setBounds(100, 100, 800, 450);
-        setTitle("Belissima - Clientes");
 
-        contentPane = new JPanel();
-        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-        contentPane.setLayout(new BorderLayout(0, 0));
-        setContentPane(contentPane);
-
-        JScrollPane scrollPane = new JScrollPane();
-        contentPane.add(scrollPane, BorderLayout.CENTER);
-
-        table = new JTable();
-        scrollPane.setViewportView(table);
-
-        // Obter os dados da tabela 'clientes' do banco de dados
-        String[][] data = getClientesData();
-        String[] columns = {"ID", "Nome", "CPF", "Número", "Endereço"};
-
-        // Configurar os dados na tabela
-        table.setModel(new javax.swing.table.DefaultTableModel(data, columns));
-    }
-
-    // Método para obter os dados da tabela 'clientes' do banco de dados
-    private String[][] getClientesData() {
-        String[][] data = null;
-        Connection connection = null;
-        Statement statement = null;
-        ResultSet resultSet = null;
-
-        try {
-            // Estabelecer a conexão com o banco de dados
-            connection = DriverManager.getConnection("jdbc:mysql://localhost/lojaderoupas", "root", "root");
-
-            // Criar a declaração SQL
-            String query = "SELECT id_cliente, nome_cliente, cpf_cliente, numero_cliente, endereco_cliente FROM clientes";
-
-            // Criar o objeto Statement
-            statement = connection.createStatement();
-
-            // Executar a consulta SQL
-            resultSet = statement.executeQuery(query);
-
-            // Obter o número de linhas no resultSet
-            resultSet.last();
-            int rowCount = resultSet.getRow();
-            resultSet.beforeFirst();
-
-            // Criar a matriz de dados com o tamanho adequado
-            data = new String[rowCount][5];
-
-            // Preencher a matriz de dados com os valores do resultSet
-            int index = 0;
-            while (resultSet.next()) {
-                data[index][0] = String.valueOf(resultSet.getInt("id_cliente"));
-                data[index][1] = resultSet.getString("nome_cliente");
-                data[index][2] = String.valueOf(resultSet.getInt("cpf_cliente"));
-                data[index][3] = String.valueOf(resultSet.getInt("numero_cliente"));
-                data[index][4] = resultSet.getString("endereco_cliente");
-                index++;
+        deleteButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int selectedRow = table.getSelectedRow();
+                if (selectedRow != -1) {
+                    int clienteId = (int) table.getValueAt(selectedRow, 0);
+                    int confirm = JOptionPane.showConfirmDialog(ClientesView.this, "Deseja realmente deletar o cliente?", "Confirmar Deleção", JOptionPane.YES_NO_OPTION);
+                    if (confirm == JOptionPane.YES_OPTION) {
+                        deletarCliente(clienteId);
+                        refreshTable();
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(ClientesView.this, "Selecione um cliente para deletar!");
+                }
             }
+        });
+
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                dispose();
+            }
+        });
+
+        refreshTable();
+    }
+
+    private void refreshTable() {
+        try {
+            Connection conn = Conexao.ConectarBanco();
+            clienteDAL = new ClienteDAL(conn);
+            List<Cliente> clientes = clienteDAL.obterClientes();
+
+            tableModel.setRowCount(0);
+
+            for (Cliente cliente : clientes) {
+                tableModel.addRow(new Object[]{
+                        cliente.getId(),
+                        cliente.getNome(),
+                        cliente.getCpf(),
+                        cliente.getNumero(),
+                        cliente.getEndereco()
+                });
+            }
+
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            // Fechar os objetos ResultSet, Statement e Connection
-            if (resultSet != null) {
-                try {
-                    resultSet.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (statement != null) {
-                try {
-                    statement.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
         }
+    }
 
-        return data;
+    private void deletarCliente(int clienteId) {
+        try {
+            Connection conn = Conexao.ConectarBanco();
+            clienteDAL = new ClienteDAL(conn);
+            clienteDAL.deletarCliente(clienteId);
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            ClientesView frame = new ClientesView();
+            frame.setVisible(true);
+        });
     }
 }

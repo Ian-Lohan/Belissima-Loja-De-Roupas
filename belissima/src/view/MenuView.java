@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.EventQueue;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,15 +14,16 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javax.swing.SwingConstants;
 
 public class MenuView extends JFrame {
 
-    private JPanel contentPane;
+	private JPanel contentPane;
     private JLabel lblClock;
     private JLabel lblDate;
-
+    
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -76,10 +78,45 @@ public class MenuView extends JFrame {
         btnRelatorio.setFont(new Font("Tahoma", Font.BOLD, 18));
         btnRelatorio.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                RelatorioView relatorioView = new RelatorioView();
+                RelatorioView relatorioView = new RelatorioView(null, null);
                 relatorioView.setVisible(true);
             }
         });
+        
+        JPanel panel_1 = new JPanel();
+        panel_1.setLayout(null);
+        panel_1.setBackground(new Color(224, 224, 224));
+        panel_1.setBounds(449, 0, 171, 409);
+        contentPane.add(panel_1);
+        
+                lblDate = new JLabel();
+                lblDate.setBounds(0, 379, 171, 30);
+                panel_1.add(lblDate);
+                lblDate.setHorizontalAlignment(SwingConstants.CENTER);
+                lblDate.setFont(new Font("Tahoma", Font.PLAIN, 12));
+                
+                        lblClock = new JLabel();
+                        lblClock.setBounds(0, 361, 171, 30);
+                        panel_1.add(lblClock);
+                        lblClock.setHorizontalAlignment(SwingConstants.CENTER);
+                        lblClock.setFont(new Font("Tahoma", Font.BOLD, 16));
+                        
+                        JLabel lblNewLabel = new JLabel("Bem-Vindo!");
+                        lblNewLabel.setBounds(0, 5, 171, 62);
+                        panel_1.add(lblNewLabel);
+                        lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+                        lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 24));
+                        
+                        JButton btnSair = new JButton("Sair");
+                        btnSair.setFont(new Font("Tahoma", Font.BOLD, 12));
+                        btnSair.setBounds(96, 57, 65, 23);
+                        panel_1.add(btnSair);
+                        
+                        JLabel lblNewLabel_1 = new JLabel("Data");
+                        lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 20));
+                        lblNewLabel_1.setBounds(10, 341, 105, 30);
+                        panel_1.add(lblNewLabel_1);
+                        
         btnUsuarios.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 UsuariosView usuariosView = new UsuariosView();
@@ -104,20 +141,17 @@ public class MenuView extends JFrame {
                 produtosView.setVisible(true);
             }
         });
+        btnSair.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	int sair = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair?", "Sair?", JOptionPane.YES_NO_OPTION);
+            	if (sair == JOptionPane.YES_OPTION) {
+            		dispose();
+            		LoginView loginView = new LoginView();
+            		loginView.setVisible(true);
+            	}
+            }
+        });
 
-        lblDate = new JLabel();
-        lblDate.setHorizontalAlignment(SwingConstants.CENTER);
-        lblDate.setBounds(449, 379, 171, 30);
-        lblDate.setFont(new Font("Tahoma", Font.PLAIN, 12));
-        contentPane.add(lblDate);
-
-        lblClock = new JLabel();
-        lblClock.setHorizontalAlignment(SwingConstants.CENTER);
-        lblClock.setBounds(449, 354, 171, 30);
-        lblClock.setFont(new Font("Tahoma", Font.BOLD, 16));
-        contentPane.add(lblClock);
-
-        // Atualizar o relógio a cada segundo
         Timer timer = new Timer(1000, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 updateTime();
@@ -126,7 +160,6 @@ public class MenuView extends JFrame {
         timer.start();
     }
 
-    // Atualizar a hora atual
     private void updateTime() {
         SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm:ss");
         SimpleDateFormat sdfDate = new SimpleDateFormat("dd/MM/yyyy");

@@ -1,128 +1,232 @@
 package view;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import dal.VendaDAL;
+import dal.DetalhesVendaDAL;
+import dao.DetalhesVenda;
+import dao.Venda;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JTable;
-import javax.swing.JScrollPane;
-
+import javax.swing.*;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableModel;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.List;
+
+import view.DetalhesVendaView;
+
+import connections.Conexao;
 
 public class VendasView extends JFrame {
-
-    private JPanel contentPane;
     private JTable table;
-
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    VendasView frame = new VendasView();
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
+    private TableModel tableModel;
+    private VendaDAL vendaDAL;
+    private DetalhesVendaDAL detalhesVendaDAL;
 
     public VendasView() {
+        setTitle("Tabela de Vendas");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setBounds(100, 100, 800, 450);
-        setTitle("Belissima - Vendas");
+        setSize(800, 400);
+        setLocationRelativeTo(null);
 
-        contentPane = new JPanel();
-        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-        contentPane.setLayout(new BorderLayout(0, 0));
-        setContentPane(contentPane);
+        tableModel = createTableModel();
+        table = new JTable(tableModel);
+        JScrollPane scrollPane = new JScrollPane(table);
+        getContentPane().add(scrollPane, BorderLayout.CENTER);
 
-        JScrollPane scrollPane = new JScrollPane();
-        contentPane.add(scrollPane, BorderLayout.CENTER);
+        JButton btnDetalhes = new JButton("Detalhes");
+        JButton btnAdicionar = new JButton("Adicionar");
+        JButton btnEditar = new JButton("Editar");
+        JButton btnDeletar = new JButton("Deletar");
 
-        table = new JTable();
-        scrollPane.setViewportView(table);
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.add(btnDetalhes);
+        buttonPanel.add(btnAdicionar);
+        buttonPanel.add(btnEditar);
+        buttonPanel.add(btnDeletar);
+        getContentPane().add(buttonPanel, BorderLayout.SOUTH);
 
-        // Obter os dados da tabela 'vendas' do banco de dados
-        String[][] data = getVendasData();
-        String[] columns = {"ID", "Data", "Pagamento", "Total", "ID Cliente", "ID Funcionário"};
+        btnDetalhes.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                mostrarDetalhesVenda();
+            }
+        });
 
-        // Configurar os dados na tabela
-        table.setModel(new javax.swing.table.DefaultTableModel(data, columns));
+        btnAdicionar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                AddVendaView adicionarView = new AddVendaView();
+                adicionarView.setVisible(true);
+                adicionarView.addWindowListener(new java.awt.event.WindowAdapter() {
+                    public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+                        try {
+                            carregarTabelaVendas();
+                        } catch (SQLException ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+                });
+            }
+        });
+
+        btnEditar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                editarVenda();
+            }
+        });
+
+        btnDeletar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                deletarVenda();
+            }
+        });
+
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                dispose();
+            }
+        });
+
+        initializeDAL();
     }
 
-    // Método para obter os dados da tabela 'vendas' do banco de dados
-    private String[][] getVendasData() {
-        String[][] data = null;
-        Connection connection = null;
-        Statement statement = null;
-        ResultSet resultSet = null;
-
+    private void initializeDAL() {
         try {
-            // Estabelecer a conexão com o banco de dados
-            connection = DriverManager.getConnection("jdbc:mysql://localhost/lojaderoupas", "root", "root");
-
-            // Criar a declaração SQL
-            String query = "SELECT id_venda, data_venda, pagamento_venda, total_venda, id_cliente, id_funcionario FROM vendas";
-
-            // Criar o objeto Statement
-            statement = connection.createStatement();
-
-            // Executar a consulta SQL
-            resultSet = statement.executeQuery(query);
-
-            // Obter o número de linhas no resultSet
-            resultSet.last();
-            int rowCount = resultSet.getRow();
-            resultSet.beforeFirst();
-
-            // Criar a matriz de dados com o tamanho adequado
-            data = new String[rowCount][6];
-
-            // Preencher a matriz de dados com os valores do resultSet
-            int index = 0;
-            while (resultSet.next()) {
-                data[index][0] = String.valueOf(resultSet.getInt("id_venda"));
-                data[index][1] = resultSet.getTimestamp("data_venda").toString();
-                data[index][2] = resultSet.getString("pagamento_venda");
-                data[index][3] = String.valueOf(resultSet.getInt("total_venda"));
-                data[index][4] = String.valueOf(resultSet.getInt("id_cliente"));
-                data[index][5] = String.valueOf(resultSet.getInt("id_funcionario"));
-                index++;
-            }
+            Connection conn = Conexao.ConectarBanco();
+            vendaDAL = new VendaDAL(conn);
+            detalhesVendaDAL = new DetalhesVendaDAL();
+            carregarTabelaVendas();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            // Fechar os objetos ResultSet, Statement e Connection
-            if (resultSet != null) {
-                try {
-                    resultSet.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (statement != null) {
-                try {
-                    statement.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
+        }
+    }
+
+
+    private TableModel createTableModel() {
+        return new VendasTableModel();
+    }
+
+    private class VendasTableModel extends AbstractTableModel {
+        private final String[] columnNames = {"ID", "Data", "Pagamento", "Total", "Cliente", "Funcionário"};
+        private List<Venda> vendas;
+
+        public void setVendas(List<Venda> vendas) {
+            this.vendas = vendas;
+            fireTableDataChanged();
         }
 
-        return data;
+        @Override
+        public int getRowCount() {
+            if (vendas != null) {
+                return vendas.size();
+            }
+            return 0;
+        }
+
+        @Override
+        public int getColumnCount() {
+            return columnNames.length;
+        }
+
+        @Override
+        public String getColumnName(int columnIndex) {
+            return columnNames[columnIndex];
+        }
+
+        @Override
+        public Object getValueAt(int rowIndex, int columnIndex) {
+            if (vendas != null && rowIndex < vendas.size()) {
+                Venda venda = vendas.get(rowIndex);
+                switch (columnIndex) {
+                    case 0:
+                        return venda.getId();
+                    case 1:
+                        return venda.getDataFormatada();
+                    case 2:
+                        return venda.getPagamento();
+                    case 3:
+                        return venda.getTotal();
+                    case 4:
+                        return venda.getIdCliente();
+                    case 5:
+                        return venda.getIdUsuario();
+                }
+            }
+            return null;
+        }
+    }
+
+    private void mostrarDetalhesVenda() {
+        int row = table.getSelectedRow();
+        if (row == -1) {
+            JOptionPane.showMessageDialog(VendasView.this, "Selecione uma venda para ver os detalhes!");
+            return;
+        }
+        int vendaId = (int) table.getValueAt(row, 0);
+        Venda vendaSelecionada = vendaDAL.obterVendaPorId(vendaId);
+        if (vendaSelecionada != null) {
+            List<DetalhesVenda> detalhesVendaList = detalhesVendaDAL.obterDetalhesVenda();
+            DetalhesVendaView detalhesView = new DetalhesVendaView(vendaSelecionada, detalhesVendaList);
+            detalhesView.setVisible(true);
+        }
+    }
+
+
+
+    private void editarVenda() {
+        int row = table.getSelectedRow();
+        if (row == -1) {
+            JOptionPane.showMessageDialog(VendasView.this, "Selecione uma venda para editar!");
+            return;
+        }
+        int vendaId = (int) table.getValueAt(row, 0);
+        Venda vendaSelecionada = vendaDAL.obterVendaPorId(vendaId);
+        if (vendaSelecionada != null) {
+            EdtVendaView editarView = new EdtVendaView(vendaSelecionada);
+            editarView.setVisible(true);
+            editarView.addWindowListener(new java.awt.event.WindowAdapter() {
+                public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+                    try {
+                        carregarTabelaVendas();
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            });
+        }
+    }
+
+    private void deletarVenda() {
+        int row = table.getSelectedRow();
+        if (row == -1) {
+            JOptionPane.showMessageDialog(VendasView.this, "Selecione uma venda para deletar!");
+            return;
+        }
+        int vendaId = (int) table.getValueAt(row, 0);
+        int confirmacao = JOptionPane.showConfirmDialog(VendasView.this, "Tem certeza que deseja deletar esta venda?", "Confirmar Deleção", JOptionPane.YES_NO_OPTION);
+        if (confirmacao == JOptionPane.YES_OPTION) {
+            vendaDAL.deletarVenda(vendaId);
+            try {
+                carregarTabelaVendas();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            JOptionPane.showMessageDialog(VendasView.this, "Venda deletada com sucesso!");
+        }
+    }
+
+    private void carregarTabelaVendas() throws SQLException {
+        List<Venda> vendas = vendaDAL.obterVendas();
+        ((VendasTableModel) tableModel).setVendas(vendas);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            VendasView frame = new VendasView();
+            frame.setVisible(true);
+        });
     }
 }

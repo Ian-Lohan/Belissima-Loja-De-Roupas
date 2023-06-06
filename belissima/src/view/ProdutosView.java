@@ -1,129 +1,170 @@
 package view;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import dal.ProdutoDAL;
+import dao.Produto;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JTable;
-import javax.swing.JScrollPane;
-
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.List;
+
+import connections.Conexao;
 
 public class ProdutosView extends JFrame {
-
-    private JPanel contentPane;
     private JTable table;
+    private DefaultTableModel tableModel;
+    private ProdutoDAL produtoDAL;
 
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    ProdutosView frame = new ProdutosView();
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
+    public ProdutosView() {
+        setTitle("Tabela de Produtos");
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setSize(800, 400);
+        setLocationRelativeTo(null);
+
+        tableModel = new DefaultTableModel();
+        tableModel.addColumn("ID");
+        tableModel.addColumn("Nome");
+        tableModel.addColumn("Tipo");
+        tableModel.addColumn("Cor");
+        tableModel.addColumn("Preço");
+        tableModel.addColumn("Estoque");
+        tableModel.addColumn("Detalhe");
+
+        table = new JTable(tableModel);
+        JScrollPane scrollPane = new JScrollPane(table);
+        getContentPane().add(scrollPane, BorderLayout.CENTER);
+
+        JPanel buttonPanel = new JPanel();
+        getContentPane().add(buttonPanel, BorderLayout.SOUTH);
+
+        JButton addButton = new JButton("Adicionar");
+        buttonPanel.add(addButton);
+
+        JButton editButton = new JButton("Editar");
+        buttonPanel.add(editButton);
+
+        JButton deleteButton = new JButton("Deletar");
+        buttonPanel.add(deleteButton);
+
+        addButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                AddProdutoView addProdutoView = new AddProdutoView();
+                addProdutoView.setVisible(true);
+                addProdutoView.addWindowListener(new WindowAdapter() {
+                    @Override
+                    public void windowClosed(WindowEvent e) {
+                        refreshTable();
+                    }
+                });
+            }
+        });
+
+        editButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int selectedRow = table.getSelectedRow();
+                if (selectedRow != -1) {
+                    int produtoId = (int) table.getValueAt(selectedRow, 0);
+
+                    try {
+                        Connection conn = Conexao.ConectarBanco();
+                        produtoDAL = new ProdutoDAL(conn);
+                        Produto produto = produtoDAL.obterProduto(produtoId);
+                        conn.close();
+
+                        if (produto != null) {
+                            EdtProdutoView edtProdutoView = new EdtProdutoView(produto.getId()); // Passando o id do produto
+                            edtProdutoView.setVisible(true);
+                            edtProdutoView.addWindowListener(new WindowAdapter() {
+                                @Override
+                                public void windowClosed(WindowEvent e) {
+                                    refreshTable();
+                                }
+                            });
+                        } else {
+                            JOptionPane.showMessageDialog(ProdutosView.this, "Produto não encontrado!");
+                        }
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(ProdutosView.this, "Selecione um produto para editar!");
                 }
             }
         });
-    }
 
-    public ProdutosView() {
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setBounds(100, 100, 800, 450);
-        setTitle("Belissima - Produtos");
-
-        contentPane = new JPanel();
-        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-        contentPane.setLayout(new BorderLayout(0, 0));
-        setContentPane(contentPane);
-
-        JScrollPane scrollPane = new JScrollPane();
-        contentPane.add(scrollPane, BorderLayout.CENTER);
-
-        table = new JTable();
-        scrollPane.setViewportView(table);
-
-        // Obter os dados da tabela 'produtos' do banco de dados
-        String[][] data = getProdutosData();
-        String[] columns = {"ID", "Nome", "Tipo", "Cor", "Preço", "Estoque", "Detalhe"};
-
-        // Configurar os dados na tabela
-        table.setModel(new javax.swing.table.DefaultTableModel(data, columns));
-    }
-
-    // Método para obter os dados da tabela 'produtos' do banco de dados
-    private String[][] getProdutosData() {
-        String[][] data = null;
-        Connection connection = null;
-        Statement statement = null;
-        ResultSet resultSet = null;
-
-        try {
-            // Estabelecer a conexão com o banco de dados
-            connection = DriverManager.getConnection("jdbc:mysql://localhost/lojaderoupas", "root", "root");
-
-            // Criar a declaração SQL
-            String query = "SELECT id_produto, nome_produto, tipo_produto, cor_produto, preco_produto, estoque_produto, detalhe_produto FROM produtos";
-
-            // Criar o objeto Statement
-            statement = connection.createStatement();
-
-            // Executar a consulta SQL
-            resultSet = statement.executeQuery(query);
-
-            // Obter o número de linhas no resultSet
-            resultSet.last();
-            int rowCount = resultSet.getRow();
-            resultSet.beforeFirst();
-
-            // Criar a matriz de dados com o tamanho adequado
-            data = new String[rowCount][7];
-
-            // Preencher a matriz de dados com os valores do resultSet
-            int index = 0;
-            while (resultSet.next()) {
-                data[index][0] = String.valueOf(resultSet.getInt("id_produto"));
-                data[index][1] = resultSet.getString("nome_produto");
-                data[index][2] = resultSet.getString("tipo_produto");
-                data[index][3] = resultSet.getString("cor_produto");
-                data[index][4] = String.valueOf(resultSet.getDouble("preco_produto"));
-                data[index][5] = String.valueOf(resultSet.getInt("estoque_produto"));
-                data[index][6] = resultSet.getString("detalhe_produto");
-                index++;
+        deleteButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int selectedRow = table.getSelectedRow();
+                if (selectedRow != -1) {
+                    int produtoId = (int) table.getValueAt(selectedRow, 0);
+                    int confirm = JOptionPane.showConfirmDialog(ProdutosView.this, "Deseja realmente deletar o produto?", "Confirmar Deleção", JOptionPane.YES_NO_OPTION);
+                    if (confirm == JOptionPane.YES_OPTION) {
+                        deletarProduto(produtoId);
+                        refreshTable();
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(ProdutosView.this, "Selecione um produto para deletar!");
+                }
             }
+        });
+
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                dispose();
+            }
+        });
+
+        refreshTable();
+    }
+
+    private void refreshTable() {
+        try {
+            Connection conn = Conexao.ConectarBanco();
+            produtoDAL = new ProdutoDAL(conn);
+            List<Produto> produtos = produtoDAL.obterProdutos();
+
+            tableModel.setRowCount(0);
+
+            for (Produto produto : produtos) {
+                tableModel.addRow(new Object[]{
+                        produto.getId(),
+                        produto.getNome(),
+                        produto.getTipo(),
+                        produto.getCor(),
+                        produto.getPreco(),
+                        produto.getEstoque(),
+                        produto.getDetalhe()
+                });
+            }
+
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            // Fechar os objetos ResultSet, Statement e Connection
-            if (resultSet != null) {
-                try {
-                    resultSet.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (statement != null) {
-                try {
-                    statement.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
         }
+    }
 
-        return data;
+    private void deletarProduto(int produtoId) {
+        try {
+            Connection conn = Conexao.ConectarBanco();
+            produtoDAL = new ProdutoDAL(conn);
+            produtoDAL.deletarProduto(produtoId);
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            ProdutosView frame = new ProdutosView();
+            frame.setVisible(true);
+        });
     }
 }
