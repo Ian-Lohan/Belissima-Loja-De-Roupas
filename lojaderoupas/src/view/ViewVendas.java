@@ -243,6 +243,7 @@ public class ViewVendas extends JFrame {
                 }
             }
         });
+		jbAdicionar.setFocusable(false);
         jbAdicionar.setIcon(new ImageIcon(ViewVendas.class.getResource("/imagens/icons8-mais-18.png")));
         jbAdicionar.setBounds(518, 74, 121, 23);
         tab1.add(jbAdicionar);
@@ -287,6 +288,7 @@ public class ViewVendas extends JFrame {
         		habilitarCampos(condicao);
         	}
         });
+		jbCancelar.setFocusable(false);
         jbCancelar.setIcon(new ImageIcon(ViewVendas.class.getResource("/imagens/icons8-cancelar-18.png")));
         jbCancelar.setBounds(9, 399, 114, 23);
         tab1.add(jbCancelar);
@@ -300,6 +302,7 @@ public class ViewVendas extends JFrame {
         		habilitarCampos(condicao);
         	}
         });
+		jbNovo.setFocusable(false);
         jbNovo.setIcon(new ImageIcon(ViewVendas.class.getResource("/imagens/icons8-documento-18.png")));
         jbNovo.setBounds(128, 399, 104, 23);
         tab1.add(jbNovo);
@@ -423,6 +426,7 @@ public class ViewVendas extends JFrame {
             		habilitarCampos(condicao);
         	}
         }});
+		jbSalvar.setFocusable(false);
         jbSalvar.setIcon(new ImageIcon(ViewVendas.class.getResource("/imagens/icons8-salvar-como-18.png")));
         jbSalvar.setBounds(535, 399, 104, 23);
         tab1.add(jbSalvar);
@@ -464,6 +468,7 @@ public class ViewVendas extends JFrame {
         		somarValorTotalProdutos();
         	}
         });
+		jbRemover.setFocusable(false);
         jbRemover.setIcon(new ImageIcon(ViewVendas.class.getResource("/imagens/icons8-limpar-símbolo-18.png")));
         jbRemover.setBounds(237, 399, 104, 23);
         tab1.add(jbRemover);
@@ -481,6 +486,15 @@ public class ViewVendas extends JFrame {
         jtfPesquisa.setColumns(10);
         
         JButton jbPesquisar = new JButton("Pesquisar");
+        jbPesquisar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (e.getSource().equals(jbPesquisar)) {
+                    String textoPesquisa = jtfPesquisa.getText();
+                    // Realize a ação desejada com o texto da pesquisa
+                }
+            }
+        });
+		jbPesquisar.setFocusable(false);
         jbPesquisar.setIcon(new ImageIcon(ViewVendas.class.getResource("/imagens/icons8-pesquisar-18.png")));
         jbPesquisar.setBounds(511, 6, 128, 23);
         tab2.add(jbPesquisar);
@@ -539,6 +553,7 @@ public class ViewVendas extends JFrame {
         		}
         	}
         });
+		jbExcluir.setFocusable(false);
         jbExcluir.setIcon(new ImageIcon(ViewVendas.class.getResource("/imagens/icons8-lixo-18.png")));
         jbExcluir.setBounds(9, 399, 104, 23);
         tab2.add(jbExcluir);
@@ -581,6 +596,7 @@ public class ViewVendas extends JFrame {
 				habilitarCampos(condicao);
         	}
         });
+		jbAlterar.setFocusable(false);
         jbAlterar.setIcon(new ImageIcon(ViewVendas.class.getResource("/imagens/icons8-lápis-18.png")));
         jbAlterar.setBounds(119, 399, 104, 23);
         tab2.add(jbAlterar);

@@ -20,15 +20,18 @@ import java.awt.Color;
 import controller.ControllerUsuarios;
 import model.ModelUsuarios;
 import javax.swing.ImageIcon;
+import model.ModelSessaoUsuario;
 
 public class ViewLogin extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField jtfLogin;
 	private JPasswordField jpfSenha;
+	private JButton jbEntrar;
 	
 	ControllerUsuarios controllerUsuarios = new ControllerUsuarios();
 	ModelUsuarios modelUsuarios = new ModelUsuarios();
+	ModelSessaoUsuario modelSessaoUsuario = new ModelSessaoUsuario();
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -67,28 +70,33 @@ public class ViewLogin extends JFrame {
 		contentPane.add(lblNewLabel_1);
 		
 		jtfLogin = new JTextField();
+		jtfLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				jpfSenha.requestFocus();
+			}
+		});
 		jtfLogin.setBounds(118, 187, 218, 20);
 		contentPane.add(jtfLogin);
 		jtfLogin.setColumns(10);
 		
 		jpfSenha = new JPasswordField();
+		jpfSenha.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				entrar();
+			}
+		});
 		jpfSenha.setColumns(10);
 		jpfSenha.setBounds(118, 213, 218, 20);
 		contentPane.add(jpfSenha);
 		
-		JButton jbEntrar = new JButton("Entrar");
+	    jbEntrar = new JButton("Entrar");
 		jbEntrar.setBackground(new Color(126, 250, 130));
 		jbEntrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				modelUsuarios.setUsuLogin(jtfLogin.getText());
-				modelUsuarios.setUsuSenha(String.valueOf(jpfSenha.getPassword()));
-				if (controllerUsuarios.validarUsuarioController(modelUsuarios)) {
-					new ViewPrincipal().setVisible(true);
-				} else {
-					JOptionPane.showMessageDialog(ViewLogin.this, "Usuário ou Senha inválidos!", "AVISO", JOptionPane.WARNING_MESSAGE);
-				}
+				entrar();
 			}
 		});
+		jbEntrar.setFocusable(false);
 		jbEntrar.setFont(new Font("Segoe UI", Font.BOLD, 12));
 		jbEntrar.setBounds(50, 249, 129, 23);
 		contentPane.add(jbEntrar);
@@ -111,9 +119,25 @@ public class ViewLogin extends JFrame {
 				System.exit(0);
 			}
 		});
+		jbSair.setFocusable(false);
 		jbSair.setFont(new Font("Segoe UI", Font.BOLD, 12));
 		jbSair.setBounds(209, 249, 129, 23);
 		contentPane.add(jbSair);
 		setLocationRelativeTo(null);
+	}
+	
+	private void entrar() {
+		modelUsuarios.setUsuLogin(jtfLogin.getText());
+		modelUsuarios.setUsuSenha(String.valueOf(jpfSenha.getPassword()));
+		if (controllerUsuarios.validarUsuarioController(modelUsuarios)) {
+			modelUsuarios = controllerUsuarios.retornarLoginUsuarioController(jtfLogin.getText());
+			modelSessaoUsuario.codigo = modelUsuarios.getIdUsuario();
+			modelSessaoUsuario.nome = modelUsuarios.getUsuNome();
+			modelSessaoUsuario.login = modelUsuarios.getUsuLogin();
+			new ViewPrincipal().setVisible(true);
+			dispose();
+		} else {
+			JOptionPane.showMessageDialog(ViewLogin.this, "Usuário ou Senha inválidos!", "AVISO", JOptionPane.WARNING_MESSAGE);
+		}
 	}
 }

@@ -11,7 +11,8 @@ import javax.swing.JMenu;
 import javax.swing.ImageIcon;
 import javax.swing.KeyStroke;
 import javax.swing.UIManager;
-
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.awt.event.KeyEvent;
 import java.awt.event.InputEvent;
 import java.awt.event.ActionListener;
@@ -22,10 +23,14 @@ import javax.swing.JButton;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 
+import model.ModelSessaoUsuario;
+
 public class ViewPrincipal extends JFrame {
 
 	private JPanel contentPane;
 	private JPanel jpPaginas;
+	private JLabel jlUsuario;
+	private JLabel jlDataHora;
 
 	/**
 	 * Launch the application.
@@ -126,6 +131,7 @@ public class ViewPrincipal extends JFrame {
 		jpPaginas.setLayout(null);
 		
 		JButton jbClientes = new JButton("Clientes");
+		jbClientes.setIcon(new ImageIcon(ViewPrincipal.class.getResource("/imagens/icons8-clientes-32.png")));
 		jbClientes.setBackground(new Color(255, 230, 236));
 		jbClientes.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
@@ -135,10 +141,11 @@ public class ViewPrincipal extends JFrame {
 		jbClientes.setFocusPainted(false);
 		jbClientes.setFocusable(false);
 		jbClientes.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		jbClientes.setBounds(34, 72, 141, 60);
+		jbClientes.setBounds(34, 61, 141, 60);
 		jpPaginas.add(jbClientes);
 		
 		JButton jbProdutos = new JButton("Produtos");
+		jbProdutos.setIcon(new ImageIcon(ViewPrincipal.class.getResource("/imagens/icons8-vestido-preto-pequeno-32.png")));
 		jbProdutos.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
 		        new ViewProduto().setVisible(true);
@@ -148,10 +155,11 @@ public class ViewPrincipal extends JFrame {
 		jbProdutos.setFocusable(false);
 		jbProdutos.setBackground(new Color(255, 230, 236));
 		jbProdutos.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		jbProdutos.setBounds(34, 176, 141, 60);
+		jbProdutos.setBounds(34, 132, 141, 60);
 		jpPaginas.add(jbProdutos);
 		
 		JButton jbUsuarios = new JButton("Usuarios");
+		jbUsuarios.setIcon(new ImageIcon(ViewPrincipal.class.getResource("/imagens/icons8-usuário-32.png")));
 		jbUsuarios.setBackground(new Color(255, 230, 236));
 		jbUsuarios.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
@@ -161,10 +169,11 @@ public class ViewPrincipal extends JFrame {
 		jbUsuarios.setFocusPainted(false);
 		jbUsuarios.setFocusable(false);
 		jbUsuarios.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		jbUsuarios.setBounds(34, 381, 141, 60);
+		jbUsuarios.setBounds(34, 274, 141, 60);
 		jpPaginas.add(jbUsuarios);
 		
 		JButton jbVendas = new JButton("Vendas");
+		jbVendas.setIcon(new ImageIcon(ViewPrincipal.class.getResource("/imagens/icons8-vendas-32.png")));
 		jbVendas.setBackground(new Color(255, 230, 236));
 		jbVendas.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
@@ -174,14 +183,42 @@ public class ViewPrincipal extends JFrame {
 		jbVendas.setFocusPainted(false);
 		jbVendas.setFocusable(false);
 		jbVendas.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		jbVendas.setBounds(34, 279, 141, 60);
+		jbVendas.setBounds(34, 203, 141, 60);
 		jpPaginas.add(jbVendas);
 		
 		JLabel lblNewLabel_1 = new JLabel("- MENU -");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblNewLabel_1.setBounds(34, 22, 141, 28);
+		lblNewLabel_1.setBounds(10, 22, 191, 28);
 		jpPaginas.add(lblNewLabel_1);
+		
+		JButton btnPdv = new JButton("PDV");
+		btnPdv.setIcon(new ImageIcon(ViewPrincipal.class.getResource("/imagens/icons8-carrinho-32.png")));
+		btnPdv.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new ViewPDV().setVisible(true);
+			}
+		});
+		btnPdv.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnPdv.setFocusable(false);
+		btnPdv.setFocusPainted(false);
+		btnPdv.setBackground(new Color(255, 230, 236));
+		btnPdv.setBounds(34, 345, 141, 60);
+		jpPaginas.add(btnPdv);
+		
+		jlUsuario = new JLabel("Usuario");
+		jlUsuario.setForeground(new Color(255, 255, 255));
+		jlUsuario.setHorizontalAlignment(SwingConstants.CENTER);
+		jlUsuario.setFont(new Font("Tahoma", Font.BOLD, 14));
+		jlUsuario.setBounds(10, 436, 191, 21);
+		jpPaginas.add(jlUsuario);
+		
+		jlDataHora = new JLabel("Data Hora");
+		jlDataHora.setHorizontalAlignment(SwingConstants.CENTER);
+		jlDataHora.setForeground(Color.WHITE);
+		jlDataHora.setFont(new Font("Tahoma", Font.BOLD, 14));
+		jlDataHora.setBounds(10, 456, 191, 21);
+		jpPaginas.add(jlDataHora);
 		
 		JLabel jlLogo = new JLabel("");
 		jlLogo.setIcon(new ImageIcon(ViewPrincipal.class.getResource("/imagens/belissimaLogo.png")));
@@ -192,6 +229,27 @@ public class ViewPrincipal extends JFrame {
 		lblNewLabel.setIcon(new ImageIcon(ViewPrincipal.class.getResource("/imagens/background.jpg")));
 		lblNewLabel.setBounds(0, 0, 1291, 691);
 		contentPane.add(lblNewLabel);
+		
+		Thread atualizacaoThread = new Thread(() -> {
+            while (true) {
+                LocalDateTime dataHoraAtual = LocalDateTime.now();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+                String dataHoraFormatada = dataHoraAtual.format(formatter);
+                jlDataHora.setText(dataHoraFormatada);
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        atualizacaoThread.start();
+		
 		setLocationRelativeTo(null);
+		setarUsuario();
+	}
+	
+	private void setarUsuario() {
+		jlUsuario.setText(ModelSessaoUsuario.nome);
 	}
 }
