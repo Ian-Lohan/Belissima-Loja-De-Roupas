@@ -1,0 +1,17 @@
+Sistema em Java para Gestão de Vendas com PVD para a loja de roupas, Belissima.
+
+Projeto extensionista feito sob demanda da cliente, Sandra Marileide da Silva, dona da loja Belissima.
+
+Projeto realizado para obtenção da nota da cadeira Programação Orientada a Objetos em Java, sob orientação da professora Leylane Graziele.
+
+O sistema trabalha com um banco de dados MySQL denominado "lojaderoupas". Possui funcionalidades como CRUD para Clientes, Usuarios, Produtos e Vendas e sistema de Ponto de Vendas para caixa de loja.
+
+Equipe:
+Ian Lohan
+Gustavo Vinicius
+Gabriel Ricardo
+Luiz Phillipe
+Douglas Chalegre
+
+Coordenadora:
+Leylane Graziele
