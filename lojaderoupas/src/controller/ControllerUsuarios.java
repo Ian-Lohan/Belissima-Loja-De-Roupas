@@ -28,6 +28,10 @@ public class ControllerUsuarios {
 		return this.daoUsuarios.retornarUsuarioDAO(pCodigo);
 	}
 	
+	public ModelUsuarios retornarLoginUsuarioController(String pLogin) {
+		return this.daoUsuarios.retornarLoginUsuarioDAO(pLogin);
+	}
+	
 	// Retornar Lista de Usuarios
 	public ArrayList<ModelUsuarios> retornarListaUsuarioController() {
 		return this.daoUsuarios.retornarListaUsuariosDAO();
