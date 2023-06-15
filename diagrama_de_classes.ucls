@@ -1,6 +1,853 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.2.4" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
-  realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
+  realizations="true" associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="conexoes.ConexaoMySql" project="lojaderoupas" 
+    file="/lojaderoupas/src/conexoes/ConexaoMySql.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="736" width="325" x="6625" y="773"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="controller.ControllerClientes" project="lojaderoupas" 
+    file="/lojaderoupas/src/controller/ControllerClientes.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="216" width="424" x="5918" y="773"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="controller.ControllerFormaPagamento" project="lojaderoupas" 
+    file="/lojaderoupas/src/controller/ControllerFormaPagamento.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="196" width="572" x="41" y="1629"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="controller.ControllerProdutos" project="lojaderoupas" 
+    file="/lojaderoupas/src/controller/ControllerProdutos.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="236" width="506" x="2897" y="773"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="controller.ControllerProdutosVendasProdutos" project="lojaderoupas" 
+    file="/lojaderoupas/src/controller/ControllerProdutosVendasProdutos.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="116" width="692" x="5186" y="773"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="controller.ControllerUsuarios" project="lojaderoupas" 
+    file="/lojaderoupas/src/controller/ControllerUsuarios.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="236" width="434" x="6990" y="773"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="controller.ControllerVendas" project="lojaderoupas" 
+    file="/lojaderoupas/src/controller/ControllerVendas.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="196" width="416" x="3485" y="773"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="controller.ControllerVendasClientes" project="lojaderoupas" 
+    file="/lojaderoupas/src/controller/ControllerVendasClientes.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="116" width="538" x="4608" y="773"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="controller.ControllerVendasProdutos" project="lojaderoupas" 
+    file="/lojaderoupas/src/controller/ControllerVendasProdutos.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="216" width="585" x="3941" y="773"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="DAO.DaoClientes" project="lojaderoupas" 
+    file="/lojaderoupas/src/DAO/DaoClientes.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="216" width="400" x="6475" y="1629"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="DAO.DaoFormaPagamento" project="lojaderoupas" 
+    file="/lojaderoupas/src/DAO/DaoFormaPagamento.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="196" width="540" x="6884" y="2245"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="DAO.DaoProdutos" project="lojaderoupas" 
+    file="/lojaderoupas/src/DAO/DaoProdutos.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="236" width="474" x="3682" y="1629"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="DAO.DaoProdutosVendasProdutos" project="lojaderoupas" 
+    file="/lojaderoupas/src/DAO/DaoProdutosVendasProdutos.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="116" width="660" x="5775" y="1629"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="DAO.DaoUsuarios" project="lojaderoupas" 
+    file="/lojaderoupas/src/DAO/DaoUsuarios.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="236" width="410" x="6936" y="1629"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="DAO.DaoVendas" project="lojaderoupas" file="/lojaderoupas/src/DAO/DaoVendas.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="196" width="392" x="4196" y="1629"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="DAO.DaoVendasClientes" project="lojaderoupas" 
+    file="/lojaderoupas/src/DAO/DaoVendasClientes.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="116" width="506" x="5229" y="1629"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="DAO.DaoVendasProdutos" project="lojaderoupas" 
+    file="/lojaderoupas/src/DAO/DaoVendasProdutos.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="216" width="561" x="4628" y="1629"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="model.ModelClientes" project="lojaderoupas" 
+    file="/lojaderoupas/src/model/ModelClientes.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="576" width="218" x="3424" y="1629"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="model.ModelFormaPagamento" project="lojaderoupas" 
+    file="/lojaderoupas/src/model/ModelFormaPagamento.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="396" width="257" x="653" y="1629"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="model.ModelProdutos" project="lojaderoupas" 
+    file="/lojaderoupas/src/model/ModelProdutos.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="336" width="201" x="1440" y="1629"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="21" language="java" name="model.ModelProdutosVendasProdutos" project="lojaderoupas" 
+    file="/lojaderoupas/src/model/ModelProdutosVendasProdutos.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="176" width="408" x="1536" y="773"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="22" language="java" name="model.ModelSessaoUsuario" project="lojaderoupas" 
+    file="/lojaderoupas/src/model/ModelSessaoUsuario.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="156" width="208" x="2047" y="773"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="23" language="java" name="model.ModelUsuarios" project="lojaderoupas" 
+    file="/lojaderoupas/src/model/ModelUsuarios.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="336" width="203" x="6382" y="773"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="24" language="java" name="model.ModelVendas" project="lojaderoupas" 
+    file="/lojaderoupas/src/model/ModelVendas.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="456" width="252" x="2276" y="1629"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="25" language="java" name="model.ModelVendasClientes" project="lojaderoupas" 
+    file="/lojaderoupas/src/model/ModelVendasClientes.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="216" width="510" x="2337" y="773"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="26" language="java" name="model.ModelVendasProdutos" project="lojaderoupas" 
+    file="/lojaderoupas/src/model/ModelVendasProdutos.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="396" width="239" x="1681" y="1629"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="27" language="java" name="util.Datas" project="lojaderoupas" file="/lojaderoupas/src/util/Datas.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="276" width="322" x="1132" y="773"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="28" language="java" name="util.Mascaras" project="lojaderoupas" file="/lojaderoupas/src/util/Mascaras.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="356" width="450" x="950" y="1629"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="29" language="java" name="view.ViewCliente" project="lojaderoupas" 
+    file="/lojaderoupas/src/view/ViewCliente.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="556" width="316" x="4568" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="30" language="java" name="view.ViewLogin" project="lojaderoupas" 
+    file="/lojaderoupas/src/view/ViewLogin.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="216" width="208" x="6134" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="31" language="java" name="view.ViewPagamentoPDV" project="lojaderoupas" 
+    file="/lojaderoupas/src/view/ViewPagamentoPDV.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="816" width="292" x="653" y="773"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="32" language="java" name="view.ViewPDV" project="lojaderoupas" file="/lojaderoupas/src/view/ViewPDV.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="376" width="222" x="1132" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="33" language="java" name="view.ViewPrincipal" project="lojaderoupas" 
+    file="/lojaderoupas/src/view/ViewPrincipal.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="216" width="169" x="304" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="34" language="java" name="view.ViewProduto" project="lojaderoupas" 
+    file="/lojaderoupas/src/view/ViewProduto.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="396" width="316" x="776" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="35" language="java" name="view.ViewUsuario" project="lojaderoupas" 
+    file="/lojaderoupas/src/view/ViewUsuario.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="396" width="316" x="6382" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="36" language="java" name="view.ViewVendas" project="lojaderoupas" 
+    file="/lojaderoupas/src/view/ViewVendas.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="696" width="355" x="2297" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="37">    
+    <end type="SOURCE" refId="36" navigable="false">      
+      <attribute id="38" name="controllerProdutosVendasProdutos"/>      
+      <multiplicity id="39" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="40">    
+    <end type="SOURCE" refId="25" navigable="false">      
+      <attribute id="41" name="listaModelVendasClientes"/>      
+      <multiplicity id="42" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="43">    
+    <bendpoint x="996" y="773"/>    
+    <end type="SOURCE" refId="34" navigable="false">      
+      <attribute id="44" name="listaModelProdutos"/>      
+      <multiplicity id="45" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="46">    
+    <end type="SOURCE" refId="36" navigable="false">      
+      <attribute id="47" name="controllerVendasClientes"/>      
+      <multiplicity id="48" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="49">    
+    <bendpoint x="1080" y="773"/>    
+    <end type="SOURCE" refId="32" navigable="false">      
+      <attribute id="50" name="listaModelVendasProdutos"/>      
+      <multiplicity id="51" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="52">    
+    <bendpoint x="1101" y="773"/>    
+    <end type="SOURCE" refId="32" navigable="false">      
+      <attribute id="53" name="modelVendasProdutos"/>      
+      <multiplicity id="54" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="55">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="56" name="daoFormaPagamento"/>      
+      <multiplicity id="57" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="58">    
+    <bendpoint x="1974" y="773"/>    
+    <end type="SOURCE" refId="32" navigable="false">      
+      <attribute id="59" name="modelVendas"/>      
+      <multiplicity id="60" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="61">    
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="62" name="modelFormaPagamento"/>      
+      <multiplicity id="63" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="64">    
+    <end type="SOURCE" refId="36" navigable="false">      
+      <attribute id="65" name="controllerProdutos"/>      
+      <multiplicity id="66" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="67">    
+    <end type="SOURCE" refId="36" navigable="false">      
+      <attribute id="68" name="datas"/>      
+      <multiplicity id="69" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="27" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="70">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <association id="71">    
+    <bendpoint x="4577" y="773"/>    
+    <end type="SOURCE" refId="29" navigable="false">      
+      <attribute id="72" name="modelClientes"/>      
+      <multiplicity id="73" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="74">    
+    <bendpoint x="3454" y="773"/>    
+    <end type="SOURCE" refId="36" navigable="false">      
+      <attribute id="75" name="modelClientes"/>      
+      <multiplicity id="76" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="77">    
+    <bendpoint x="1505" y="773"/>    
+    <end type="SOURCE" refId="36" navigable="false">      
+      <attribute id="78" name="listaModelProdutos"/>      
+      <multiplicity id="79" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="80">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <generalization id="81">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <association id="82">    
+    <end type="SOURCE" refId="36" navigable="false">      
+      <attribute id="83" name="controllerClientes"/>      
+      <multiplicity id="84" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="85">    
+    <end type="SOURCE" refId="32" navigable="false">      
+      <attribute id="86" name="controllerVendasProdutos"/>      
+      <multiplicity id="87" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="88">    
+    <bendpoint x="1059" y="773"/>    
+    <end type="SOURCE" refId="32" navigable="false">      
+      <attribute id="89" name="modelProdutos"/>      
+      <multiplicity id="90" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="91">    
+    <end type="SOURCE" refId="34" navigable="false">      
+      <attribute id="92" name="controllerProdutos"/>      
+      <multiplicity id="93" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="94">    
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="95" name="mascaras"/>      
+      <multiplicity id="96" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="28" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="97">    
+    <bendpoint x="1038" y="773"/>    
+    <end type="SOURCE" refId="32" navigable="false">      
+      <attribute id="98" name="listaModelProdutos"/>      
+      <multiplicity id="99" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="100">    
+    <bendpoint x="2306" y="773"/>    
+    <end type="SOURCE" refId="36" navigable="false">      
+      <attribute id="101" name="listaModelVendas"/>      
+      <multiplicity id="102" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="103">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="104" name="daoVendasProdutos"/>      
+      <multiplicity id="105" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="106">    
+    <end type="SOURCE" refId="30" navigable="false">      
+      <attribute id="107" name="modelSessaoUsuario"/>      
+      <multiplicity id="108" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="109">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <association id="110">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="111" name="daoClientes"/>      
+      <multiplicity id="112" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="113">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="114" name="daoProdutos"/>      
+      <multiplicity id="115" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="116">    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="117" name="modelProdutos"/>      
+      <multiplicity id="118" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="119">    
+    <end type="SOURCE" refId="35" navigable="false">      
+      <attribute id="120" name="listaModelUsuarios"/>      
+      <multiplicity id="121" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="122">    
+    <end type="SOURCE" refId="30" navigable="false">      
+      <attribute id="123" name="modelUsuarios"/>      
+      <multiplicity id="124" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="125">    
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="126" name="controllerFormaPagamento"/>      
+      <multiplicity id="127" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="128">    
+    <end type="SOURCE" refId="25" navigable="false">      
+      <attribute id="129" name="modelClientes"/>      
+      <multiplicity id="130" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="131">    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="132" name="modelVendasProdutos"/>      
+      <multiplicity id="133" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="134">    
+    <end type="SOURCE" refId="36" navigable="false">      
+      <attribute id="135" name="listaModelProdutosVendasProdutos"/>      
+      <multiplicity id="136" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="137">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <generalization id="138">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <generalization id="139">    
+    <bendpoint x="6905" y="1629"/>    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <association id="140">    
+    <end type="SOURCE" refId="36" navigable="false">      
+      <attribute id="141" name="controllerVendasProdutos"/>      
+      <multiplicity id="142" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="143">    
+    <end type="SOURCE" refId="25" navigable="false">      
+      <attribute id="144" name="modelVendas"/>      
+      <multiplicity id="145" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="146">    
+    <end type="SOURCE" refId="36" navigable="false">      
+      <attribute id="147" name="modelProdutosVendasProdutos"/>      
+      <multiplicity id="148" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="149">    
+    <bendpoint x="1017" y="773"/>    
+    <end type="SOURCE" refId="32" navigable="false">      
+      <attribute id="150" name="mascaras"/>      
+      <multiplicity id="151" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="28" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="152">    
+    <end type="SOURCE" refId="35" navigable="false">      
+      <attribute id="153" name="modelUsuarios"/>      
+      <multiplicity id="154" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="155">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="156" name="daoVendas"/>      
+      <multiplicity id="157" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="158">    
+    <end type="SOURCE" refId="32" navigable="false">      
+      <attribute id="159" name="controllerVendas"/>      
+      <multiplicity id="160" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="161">    
+    <end type="SOURCE" refId="32" navigable="false">      
+      <attribute id="162" name="controllerProdutos"/>      
+      <multiplicity id="163" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="164">    
+    <bendpoint x="975" y="773"/>    
+    <end type="SOURCE" refId="34" navigable="false">      
+      <attribute id="165" name="modelProdutos"/>      
+      <multiplicity id="166" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="167">    
+    <end type="SOURCE" refId="32" navigable="false">      
+      <attribute id="168" name="viewPagamentoPDV"/>      
+      <multiplicity id="169" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="31" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="170">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="171" name="daoProdutosVendasProdutos"/>      
+      <multiplicity id="172" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="173">    
+    <bendpoint x="3433" y="773"/>    
+    <end type="SOURCE" refId="36" navigable="false">      
+      <attribute id="174" name="listaModelClientes"/>      
+      <multiplicity id="175" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="176">    
+    <end type="SOURCE" refId="30" navigable="false">      
+      <attribute id="177" name="controllerUsuarios"/>      
+      <multiplicity id="178" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="179">    
+    <end type="SOURCE" refId="36" navigable="false">      
+      <attribute id="180" name="listaModelVendasClientes"/>      
+      <multiplicity id="181" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="182">    
+    <bendpoint x="2016" y="773"/>    
+    <end type="SOURCE" refId="36" navigable="false">      
+      <attribute id="183" name="modelVendasProdutos"/>      
+      <multiplicity id="184" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="185">    
+    <end type="SOURCE" refId="36" navigable="false">      
+      <attribute id="186" name="controllerVendas"/>      
+      <multiplicity id="187" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="188">    
+    <bendpoint x="1995" y="773"/>    
+    <end type="SOURCE" refId="36" navigable="false">      
+      <attribute id="189" name="listaModelVendasProdutos"/>      
+      <multiplicity id="190" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="191">    
+    <bendpoint x="4556" y="773"/>    
+    <end type="SOURCE" refId="29" navigable="false">      
+      <attribute id="192" name="listaModelClientes"/>      
+      <multiplicity id="193" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="194">    
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="195" name="listaModelFormaPagamento"/>      
+      <multiplicity id="196" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="197">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <association id="198">    
+    <end type="SOURCE" refId="32" navigable="false">      
+      <attribute id="199" name="datas"/>      
+      <multiplicity id="200" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="27" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="201">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="202" name="daoUsuarios"/>      
+      <multiplicity id="203" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="204">    
+    <end type="SOURCE" refId="35" navigable="false">      
+      <attribute id="205" name="controllerUsuarios"/>      
+      <multiplicity id="206" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="207">    
+    <end type="SOURCE" refId="32" navigable="false">      
+      <attribute id="208" name="modelSessaoUsuario"/>      
+      <multiplicity id="209" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="210">    
+    <bendpoint x="2285" y="773"/>    
+    <end type="SOURCE" refId="36" navigable="false">      
+      <attribute id="211" name="modelVendas"/>      
+      <multiplicity id="212" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="213">    
+    <bendpoint x="1484" y="773"/>    
+    <end type="SOURCE" refId="36" navigable="false">      
+      <attribute id="214" name="modelProdutos"/>      
+      <multiplicity id="215" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="216">    
+    <end type="SOURCE" refId="29" navigable="false">      
+      <attribute id="217" name="controllerClientes"/>      
+      <multiplicity id="218" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="219">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="220" name="daoVendasClientes"/>      
+      <multiplicity id="221" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    
