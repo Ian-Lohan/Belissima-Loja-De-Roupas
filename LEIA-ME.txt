@@ -6,6 +6,8 @@ Projeto realizado para obtenção da nota da cadeira Programação Orientada a O
 
 O sistema trabalha com um banco de dados MySQL denominado "lojaderoupas". Possui funcionalidades como CRUD para Clientes, Usuarios, Produtos e Vendas e sistema de Ponto de Vendas para caixa de loja.
 
+O sistema trabalha com bibliotecas como Swing para a produção de interfaces de úsuario.
+
 Equipe:
 Ian Lohan
 Gustavo Vinicius
