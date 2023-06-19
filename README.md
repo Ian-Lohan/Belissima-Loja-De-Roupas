@@ -28,6 +28,16 @@ Neste sistema é possivel gerenciar um banco de dados para controle de estoque, 
 
 ## Screenshots
 
+Tela inicial
+:-------------------------:
+![Inicio]()
+
+
+Gerenciamento de Clientes
+:-------------------------:
+![Clientes]()
+
+
 Gerenciamento de Clientes
 :-------------------------:
 ![Clientes]()
