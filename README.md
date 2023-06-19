@@ -105,7 +105,7 @@ O projeto está: _Finalizado (com possíveis atualizações futuras)_
 Esse projeto é licenciado sob a Licença MIT.
 
 ## Contribuir
-1. Faça um fork do projeto (<[https://github.com/Ian-Lohan/Projeto-Loja-de-Roupas]>
+1. Faça um fork do projeto (<[https://github.com/Ian-Lohan/Projeto-Loja-de-Roupas]>)
 2. Faça a sua própria branch (`git checkout -b feature/fooBar`)
 3. Coloque as suas mudanças (`git commit -am 'Add some fooBar'`)
 4. Salve as na sua branch (`git push origin feature/fooBar`)
