@@ -1,5 +1,5 @@
 # Sistema de Banco de Dados para Loja de Roupas
-Um aplicativo com viés de simplicidade e objetividade, com foco em ajudar a comunidade, mais especificamente pequenos empresários que possuem lojas de roupas simples.
+Um aplicativo com viés de simplicidade e objetividade, com foco em ajudar a comunidade, mais especificamente pequenos empresários que possuem lojas de roupas simples. Projeto extensionista realizado para obtenção da nota na cadeira de Programação Orientada a Objetos em Java da faculdade UniFavip Wyden, Indianopolis - Caruaru - PE.
 
 ### Grupo
 - [**Ian Lohan**](https://github.com/Ian-Lohan)
