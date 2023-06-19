@@ -62,7 +62,7 @@ Gerenciamento de Funcionários
 ## Tecnologias
 * Java 8
 * MySQL
-* WindowFrame
+* Swing
 
 ## Setup
 
