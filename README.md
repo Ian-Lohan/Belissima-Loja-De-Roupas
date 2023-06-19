@@ -21,10 +21,9 @@ Um aplicativo com viés de simplicidade e objetividade, com foco em ajudar a com
 ## Informações Gerais
 Esse sistema foi desenvolvido para o curso de POO em Java da Faculdade UniFavip Wyden.
 
-Neste sistema é possivel gerenciar um banco de dados para controle de estoque, clientes e funcionarios em uma loja de roupas. Este projeto foi desenvolvido utilizando a linguagem de programação Java, o banco de dados mySQL e a IDE para projetos em Java Eclipse, utilizando o widget toolkit GUI Swing para a produção de interfaces.
+Neste sistema é possivel gerenciar um banco de dados para controle de estoque, clientes e funcionarios em uma loja de roupas. Este projeto foi desenvolvido utilizando a linguagem de programação Java, o banco de dados MySQL e a IDE para projetos em Java Eclipse, utilizando o widget toolkit GUI Swing para a produção de interfaces.
 
 ## Screenshots
-
 
 #### Login
 <p align="center">
