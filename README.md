@@ -28,6 +28,12 @@ Neste sistema é possivel gerenciar um banco de dados para controle de estoque, 
 
 ## Screenshots
 
+
+Login
+:-------------------------:
+![Login]()
+
+
 Tela inicial
 :-------------------------:
 ![Inicio]()
@@ -38,14 +44,30 @@ Gerenciamento de Clientes
 ![Clientes]()
 
 
-Gerenciamento de Estoque
+Gerenciamento de Produtos
 :-------------------------:
-![Estoque]()
+![Produtos]()
+
+
+Página de Vendas
+:-------------------------:
+![PDV]()
+
+
+Gerenciamento das Vendas
+:-------------------------:
+![Vendas1]()
+![Vendas2]()
+
+
+Gerenciamento de Produtos
+:-------------------------:
+![Produtos]()
 
 
 Gerenciamento de Funcionários
 :-------------------------:
-![Funcionarios]()
+![Usuarios]()
 
 
 Diagrama de Classes
