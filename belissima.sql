@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 15/06/2023 às 07:12
+-- Tempo de geração: 19/06/2023 às 18:53
 -- Versão do servidor: 10.4.28-MariaDB
 -- Versão do PHP: 8.2.4
 
@@ -38,6 +38,36 @@ CREATE TABLE `tbl_cliente` (
   `cli_telefone` varchar(15) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Despejando dados para a tabela `tbl_cliente`
+--
+
+INSERT INTO `tbl_cliente` (`pk_id_cliente`, `cli_nome`, `cli_endereco`, `cli_bairro`, `cli_cidade`, `cli_uf`, `cli_cep`, `cli_telefone`) VALUES
+(1, 'teste', 'rua', 'bairro', 'cidade', 'PE', 'cep', '01');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `tbl_forma_pagamento`
+--
+
+CREATE TABLE `tbl_forma_pagamento` (
+  `pk_id_forma_pagamento` int(11) NOT NULL,
+  `descricao_for_pag` varchar(255) NOT NULL,
+  `desconto_for_pag` double NOT NULL,
+  `parcelas_for_pag` int(11) NOT NULL,
+  `situacao_for_pag` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Despejando dados para a tabela `tbl_forma_pagamento`
+--
+
+INSERT INTO `tbl_forma_pagamento` (`pk_id_forma_pagamento`, `descricao_for_pag`, `desconto_for_pag`, `parcelas_for_pag`, `situacao_for_pag`) VALUES
+(1, 'A Vista', 0, 1, 1),
+(2, 'Crédito', 0, 1, 2),
+(3, 'Crédito (12 parcelas)', 0, 12, 3);
+
 -- --------------------------------------------------------
 
 --
@@ -50,6 +80,13 @@ CREATE TABLE `tbl_produto` (
   `pro_valor` double NOT NULL,
   `pro_estoque` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Despejando dados para a tabela `tbl_produto`
+--
+
+INSERT INTO `tbl_produto` (`pk_id_produto`, `pro_nome`, `pro_valor`, `pro_estoque`) VALUES
+(1, 'produto teste', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -69,7 +106,8 @@ CREATE TABLE `tbl_usuario` (
 --
 
 INSERT INTO `tbl_usuario` (`pk_id_usuario`, `usu_nome`, `usu_login`, `usu_senha`) VALUES
-(1, 'Administrador', 'admin', 'admin');
+(1, 'Administrador', 'admin', 'admin'),
+(2, 'teste', 'teste', 'teste');
 
 -- --------------------------------------------------------
 
@@ -111,6 +149,12 @@ ALTER TABLE `tbl_cliente`
   ADD PRIMARY KEY (`pk_id_cliente`);
 
 --
+-- Índices de tabela `tbl_forma_pagamento`
+--
+ALTER TABLE `tbl_forma_pagamento`
+  ADD PRIMARY KEY (`pk_id_forma_pagamento`);
+
+--
 -- Índices de tabela `tbl_produto`
 --
 ALTER TABLE `tbl_produto`
@@ -145,19 +189,25 @@ ALTER TABLE `tbl_vendas_produtos`
 -- AUTO_INCREMENT de tabela `tbl_cliente`
 --
 ALTER TABLE `tbl_cliente`
-  MODIFY `pk_id_cliente` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `pk_id_cliente` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de tabela `tbl_forma_pagamento`
+--
+ALTER TABLE `tbl_forma_pagamento`
+  MODIFY `pk_id_forma_pagamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `tbl_produto`
 --
 ALTER TABLE `tbl_produto`
-  MODIFY `pk_id_produto` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `pk_id_produto` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `tbl_usuario`
 --
 ALTER TABLE `tbl_usuario`
-  MODIFY `pk_id_usuario` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `pk_id_usuario` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `tbl_vendas`
