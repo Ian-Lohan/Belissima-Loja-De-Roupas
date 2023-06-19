@@ -25,27 +25,27 @@ Neste sistema é possivel gerenciar um banco de dados para controle de estoque, 
 
 ## Screenshots
 
-#### Login
+<h3 align="center">Login</h1>
 <p align="center">
   <img width="500" src="https://github.com/Ian-Lohan/Belissima-Loja-De-Roupas/blob/main/img/Login.png">
 </p>
 
-#### Tela Principal
+<h3 align="center">Tela Principal</h1>
 <p align="center">
   <img width="500" src="https://github.com/Ian-Lohan/Belissima-Loja-De-Roupas/blob/main/img/Menu.png">
 </p>
 
-#### Gerenciamento de Clientes
+<h3 align="center">Gerenciamento de Clientes</h1>
 <p align="center">
   <img width="500" src="https://github.com/Ian-Lohan/Belissima-Loja-De-Roupas/blob/main/img/Clientes.png">
 </p>
 
-#### Gerenciamento de Produtos
+<h3 align="center">Gerenciamento de Produtos</h1>
 <p align="center">
   <img width="500" src="https://github.com/Ian-Lohan/Belissima-Loja-De-Roupas/blob/main/img/Produtos.png">
 </p>
 
-#### Gerenciamento das Vendas
+<h3 align="center">Gerenciamento das Vendas</h1>
 <p align="center">
   <img width="500" src="https://github.com/Ian-Lohan/Belissima-Loja-De-Roupas/blob/main/img/Vendas%201.png">
 </p>
@@ -54,17 +54,17 @@ Neste sistema é possivel gerenciar um banco de dados para controle de estoque, 
   <img width="500" src="https://github.com/Ian-Lohan/Belissima-Loja-De-Roupas/blob/main/img/Vendas%202.png">
 </p>
 
-#### Gerenciamento de Usuários
+<h3 align="center">Gerenciamento de Usuários</h1>
 <p align="center">
   <img width="500" src="https://github.com/Ian-Lohan/Belissima-Loja-De-Roupas/blob/main/img/Usuarios.png">
 </p>
 
-#### Ponto de Vendas (PDV)
+<h3 align="center">Ponto de Vendas(PDV)</h1>
 <p align="center">
   <img width="500" src="https://github.com/Ian-Lohan/Belissima-Loja-De-Roupas/blob/main/img/PDV.png">
 </p>
 
-#### Pagamento
+<h3 align="center">Pagamento</h1>
 <p align="center">
   <img width="500" src="https://github.com/Ian-Lohan/Belissima-Loja-De-Roupas/blob/main/img/Pagamento.png">
 </p>
