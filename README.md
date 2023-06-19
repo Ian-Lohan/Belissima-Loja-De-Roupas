@@ -38,11 +38,6 @@ Gerenciamento de Clientes
 ![Clientes]()
 
 
-Gerenciamento de Clientes
-:-------------------------:
-![Clientes]()
-
-
 Gerenciamento de Estoque
 :-------------------------:
 ![Estoque]()
@@ -51,6 +46,11 @@ Gerenciamento de Estoque
 Gerenciamento de Funcionários
 :-------------------------:
 ![Funcionarios]()
+
+
+Diagrama de Classes
+:-------------------------:
+![Classes]()
 
 
 ## Ferramentas
