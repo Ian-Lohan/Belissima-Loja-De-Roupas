@@ -21,6 +21,7 @@ import controller.ControllerUsuarios;
 import model.ModelUsuarios;
 import javax.swing.ImageIcon;
 import model.ModelSessaoUsuario;
+import conexoes.ConexaoMySql;
 
 public class ViewLogin extends JFrame {
 
@@ -48,6 +49,15 @@ public class ViewLogin extends JFrame {
 	}
 
 	public ViewLogin() {
+		ConexaoMySql conexao = new ConexaoMySql();
+	    conexao.conectar();
+
+	    if (!conexao.isStatus()) {
+	        JOptionPane.showMessageDialog(ViewLogin.this, "O banco de dados não foi ativado.", "ERRO", JOptionPane.ERROR_MESSAGE);
+	        System.exit(0);
+	    }
+	    
+		setTitle("Login");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 400, 320);

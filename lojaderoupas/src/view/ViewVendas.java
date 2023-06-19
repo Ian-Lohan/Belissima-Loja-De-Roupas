@@ -470,7 +470,7 @@ public class ViewVendas extends JFrame {
         });
 		jbRemover.setFocusable(false);
         jbRemover.setIcon(new ImageIcon(ViewVendas.class.getResource("/imagens/icons8-limpar-símbolo-18.png")));
-        jbRemover.setBounds(237, 399, 104, 23);
+        jbRemover.setBounds(237, 399, 114, 23);
         tab1.add(jbRemover);
 
         tabbedPane.addTab("Consultar/Excluir/Alterar", tab2);
@@ -607,8 +607,12 @@ public class ViewVendas extends JFrame {
         listarClientes();
         listarProdutos();
         carregarVendas();
-        preencherCodigoClientePeloCombobox();
-        preencherCodigoProdutoPeloCombobox();
+        try {
+        	preencherCodigoClientePeloCombobox();
+        	preencherCodigoProdutoPeloCombobox();
+        } catch (Exception e) {
+        	JOptionPane.showMessageDialog(this, "Nenhuma venda encontrada.");
+        }
 	}
 	
 	private void listarClientes() {

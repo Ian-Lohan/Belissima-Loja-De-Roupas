@@ -43,23 +43,23 @@ public class ViewPagamentoPDV extends JDialog {
 	Mascaras mascaras = new Mascaras();
 	
 	private final JPanel contentPanel = new JPanel();
-	private JTextField jtfTroco;
 	private JLabel lblNewLabel_3;
 	private JTextField jtfSubtotal;
 	private JLabel lblNewLabel_4;
 	private JTextField jtfDesconto;
-	private JLabel lblNewLabel;
-	private JTextField jtfRecebido;
 	private JLabel jlValorTotal;
 	private JButton jbConfirmar;
 	private JLabel lblNewLabel_2;
 	private JComboBox jcbPagamento;
 	public float valorTotal;
-	public float desconto;
 	public float valorRecebido;
-	public float troco;
 	public String formaPagamento;
 	private boolean pago;
+	private JLabel jlTroco;
+	private JTextField jtfParcelas;
+	float total, desconto, recebido, pagar, troco;
+	private JLabel jlRecebido;
+	private JTextField jtfRecebido;
 	
 	public static void main(String[] args) {
 		try {
@@ -76,147 +76,162 @@ public class ViewPagamentoPDV extends JDialog {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowActivated(WindowEvent e) {
-				jtfDesconto.requestFocus();
+				jtfRecebido.requestFocus();
 			}
 		});
 		setTitle("Pagamento");
-		setBounds(100, 100, 450, 406);
+		setBounds(100, 100, 450, 440);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		{
 			lblNewLabel_3 = new JLabel("Subtotal:");
-			lblNewLabel_3.setBounds(10, 14, 101, 27);
+			lblNewLabel_3.setBounds(10, 11, 101, 27);
 			lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 15));
 		}
 		{
 			lblNewLabel_4 = new JLabel("Desconto:");
-			lblNewLabel_4.setBounds(10, 87, 101, 27);
+			lblNewLabel_4.setBounds(10, 159, 101, 27);
 			lblNewLabel_4.setFont(new Font("Tahoma", Font.BOLD, 15));
-		}
-		{
-			lblNewLabel = new JLabel("Recebido:");
-			lblNewLabel.setBounds(10, 125, 101, 27);
-			lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
 		}
 		{
 			jtfSubtotal = new JTextField();
 			jtfSubtotal.setText("0");
 			jtfSubtotal.setEditable(false);
-			jtfSubtotal.setBounds(121, 15, 302, 24);
+			jtfSubtotal.setBounds(121, 12, 302, 24);
 			jtfSubtotal.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		}
 		{
 			jtfDesconto = new JTextField();
 			jtfDesconto.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					jtfRecebido.requestFocus();
+					if (recebido >= pagar) {
+					    jbConfirmar.requestFocus();
+					} else {
+						jtfRecebido.requestFocus();
+					}
 				}
 			});
 			jtfDesconto.setText("0");
 			jtfDesconto.addFocusListener(new FocusAdapter() {
 				@Override
 				public void focusLost(FocusEvent e) {
+					if (jtfDesconto.getText().isEmpty()) {
+						jtfDesconto.setText("0");
+					}
 					jtfDesconto.setText(mascaras.converterVirgulaParaPonto(jtfDesconto.getText()));
 					calcularPagamento();
 				}
 			});
-			jtfDesconto.setBounds(121, 88, 302, 24);
+			jtfDesconto.setBounds(121, 160, 302, 24);
 			jtfDesconto.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		}
-		{
-			jtfRecebido = new JTextField();
-			jtfRecebido.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					if (!(Float.parseFloat(jtfTroco.getText()) < 0)) {
-						confirmarVenda();
-					} else {
-						JOptionPane.showMessageDialog(ViewPagamentoPDV.this, "Pagamento incompleto.", "ATENÇÃO", JOptionPane.WARNING_MESSAGE);
-					}
-				}
-			});
-			jtfRecebido.setText("0");
-			jtfRecebido.addFocusListener(new FocusAdapter() {
-				@Override
-				public void focusLost(FocusEvent e) {
-					jtfRecebido.setText(mascaras.converterVirgulaParaPonto(jtfRecebido.getText()));
-					calcularPagamento();
-				}
-			});
-			jtfRecebido.setBounds(121, 126, 302, 24);
-			jtfRecebido.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		}
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(10, 184, 413, 141);
-		TitledBorder titledBorder = new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Valor Total a Pagar", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0));
+		panel.setBounds(10, 197, 413, 141);
+		TitledBorder titledBorder = new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Valor Total a Pagar | Troco do Cliente", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0));
 		titledBorder.setTitleFont(titledBorder.getTitleFont().deriveFont(Font.BOLD, 16));
 		panel.setBorder(titledBorder);
 		panel.setLayout(null);
 		{
-			jlValorTotal = new JLabel("valor");
+			jlValorTotal = new JLabel("0.00");
 			jlValorTotal.setHorizontalAlignment(SwingConstants.CENTER);
 			jlValorTotal.setFont(new Font("Tahoma", Font.PLAIN, 42));
-			jlValorTotal.setBounds(10, 11, 393, 119);
+			jlValorTotal.setBounds(10, 11, 200, 119);
 			panel.add(jlValorTotal);
 		}
 		
 		jbConfirmar = new JButton("Confirmar");
+		jbConfirmar.setFont(new Font("Tahoma", Font.BOLD, 18));
 		jbConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (!(Float.parseFloat(jtfTroco.getText()) < 0)) {
+				if (!(Float.parseFloat(jlTroco.getText()) < 0)) {
 					confirmarVenda();
 				} else {
 					JOptionPane.showMessageDialog(ViewPagamentoPDV.this, "Pagamento incompleto.", "ATENÇÃO", JOptionPane.WARNING_MESSAGE);
 				}
 			}
 		});
-		jbConfirmar.setBounds(314, 335, 109, 23);
-		
-		JLabel lblNewLabel_1 = new JLabel("Troco:");
-		lblNewLabel_1.setBounds(10, 333, 71, 22);
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 15));
-		
-		jtfTroco = new JTextField();
-		jtfTroco.setEditable(false);
-		jtfTroco.setBounds(64, 335, 240, 23);
-		jtfTroco.setColumns(10);
+		jbConfirmar.setBounds(93, 344, 255, 46);
 		contentPanel.setLayout(null);
 		contentPanel.add(lblNewLabel_3);
 		contentPanel.add(jtfSubtotal);
 		contentPanel.add(lblNewLabel_4);
 		contentPanel.add(jtfDesconto);
-		contentPanel.add(lblNewLabel);
-		contentPanel.add(jtfRecebido);
 		contentPanel.add(panel);
-		contentPanel.add(jtfTroco);
-		contentPanel.add(lblNewLabel_1);
+		{
+			jlTroco = new JLabel("0.00");
+			jlTroco.setHorizontalAlignment(SwingConstants.CENTER);
+			jlTroco.setFont(new Font("Tahoma", Font.PLAIN, 42));
+			jlTroco.setBounds(215, 11, 188, 119);
+			panel.add(jlTroco);
+		}
 		contentPanel.add(jbConfirmar);
 		
 		{
 			lblNewLabel_2 = new JLabel("Pagamento:");
 			lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 15));
-			lblNewLabel_2.setBounds(10, 49, 101, 27);
+			lblNewLabel_2.setBounds(10, 45, 101, 27);
 			contentPanel.add(lblNewLabel_2);
 		}
 		{
 			jcbPagamento = new JComboBox();
 			jcbPagamento.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					jtfDesconto.requestFocus();
+					int indiceSelecionado = jcbPagamento.getSelectedIndex();
+			        if (indiceSelecionado >= 0 && indiceSelecionado < listaModelFormaPagamento.size()) {
+			            ModelFormaPagamento formaPagamentoSelecionada = listaModelFormaPagamento.get(indiceSelecionado);
+			            int parcelas = formaPagamentoSelecionada.getForPagParcelas();
+			            jtfParcelas.setText(String.valueOf(parcelas));
+			        }
+					jtfRecebido.requestFocus();
 				}
 			});
 			jcbPagamento.requestFocus();
-			jcbPagamento.setBounds(121, 52, 302, 24);
+			jcbPagamento.setBounds(121, 48, 302, 24);
 			contentPanel.add(jcbPagamento);
+		}
+		
+		JLabel jlParcelas = new JLabel("Parcelas:");
+		jlParcelas.setFont(new Font("Tahoma", Font.BOLD, 15));
+		jlParcelas.setBounds(10, 83, 101, 27);
+		contentPanel.add(jlParcelas);
+		
+		jtfParcelas = new JTextField();
+		jtfParcelas.setEditable(false);
+		jtfParcelas.setText("1");
+		jtfParcelas.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		jtfParcelas.setBounds(121, 84, 302, 24);
+		contentPanel.add(jtfParcelas);
+		{
+			jlRecebido = new JLabel("Recebido:");
+			jlRecebido.setFont(new Font("Tahoma", Font.BOLD, 15));
+			jlRecebido.setBounds(10, 121, 101, 27);
+			contentPanel.add(jlRecebido);
+		}
+		{
+			jtfRecebido = new JTextField();
+			jtfRecebido.addFocusListener(new FocusAdapter() {
+				@Override
+				public void focusLost(FocusEvent e) {
+					calcularPagamento();
+				}
+			});
+			jtfRecebido.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					jtfDesconto.requestFocus();
+				}
+			});
+			jtfRecebido.setText("0");
+			jtfRecebido.setFont(new Font("Tahoma", Font.PLAIN, 15));
+			jtfRecebido.setBounds(121, 122, 302, 24);
+			contentPanel.add(jtfRecebido);
 		}
 		
 		listarFormaPagamento();
 		setLocationRelativeTo(null);
 		this.pago = false;
 		limparCampos();
-		calcularPagamento();
-		jtfDesconto.requestFocus();
 	}
 	
 	private void listarFormaPagamento() {
@@ -239,9 +254,9 @@ public class ViewPagamentoPDV extends JDialog {
 			confirmarVenda();
 		}
 		try {
-			this.troco = Float.parseFloat(jtfTroco.getText());
+			this.troco = Float.parseFloat(jlTroco.getText());
 		} catch (Exception e) {
-			this.jtfTroco.setText("0");;
+			this.jlTroco.setText("0");;
 			confirmarVenda();
 		}
 		try {
@@ -267,37 +282,38 @@ public class ViewPagamentoPDV extends JDialog {
 	}
 	
 	private void calcularPagamento() {
-		float total, desconto, recebido, pagar, troco;
-		try {
-			total = Float.parseFloat(jtfSubtotal.getText());
-		} catch (Exception e) {
-			total = 0;
-			jtfSubtotal.setText("0");
-		}
-		try {
-			desconto = Float.parseFloat(jtfDesconto.getText());
-		} catch (Exception e) {
-			desconto = 0;
-			jtfDesconto.setText("0");
+	    total = Float.parseFloat(jtfSubtotal.getText());
+	    
+	    if (jtfDesconto.getText().isEmpty()) {
+	        desconto = 0;
+	    } else {
+	        desconto = Float.parseFloat(jtfDesconto.getText());
+	    }
+	    
+	    if (jtfRecebido.getText().isEmpty()) {
+	        recebido = 0;
+	    } else {
+	        recebido = Float.parseFloat(jtfRecebido.getText());
+	    }
+	    
+	    pagar = total - desconto;
 
-		}
-		try {
-			recebido = Float.parseFloat(jtfRecebido.getText());
-		} catch (Exception e) {
-			recebido = 0;
-			jtfRecebido.setText("0");
-
-		}
-		pagar = total - desconto;
-		jlValorTotal.setText(mascaras.converterArredondar2CasaPontoString(pagar));
-		troco = recebido - pagar;
-		jtfTroco.setText(mascaras.converterArredondar2CasaPontoString(troco));
+	    if (recebido >= pagar) {
+	        troco = recebido - pagar;
+	        jlValorTotal.setText("0.00");
+	        jlTroco.setText(String.format("%.2f", troco));
+	        jbConfirmar.setEnabled(true);
+	    } else {
+	        troco = 0;
+	        jlValorTotal.setText(String.format("%.2f", pagar));
+	        jlTroco.setText(String.format("%.2f", troco));
+	        jbConfirmar.setEnabled(false);
+	    }
 	}
 	
 	private void limparCampos() {
 		jcbPagamento.setSelectedItem(0);
-		jtfDesconto.setText("");
-		jtfRecebido.setText("");
+		jtfDesconto.setText("0");
 	}
 	
 

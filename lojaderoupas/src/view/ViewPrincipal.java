@@ -31,6 +31,7 @@ public class ViewPrincipal extends JFrame {
 	private JPanel jpPaginas;
 	private JLabel jlUsuario;
 	private JLabel jlDataHora;
+	private JButton jbUsuarios;
 
 	/**
 	 * Launch the application.
@@ -124,7 +125,7 @@ public class ViewPrincipal extends JFrame {
 		contentPane.requestFocusInWindow();
 		
 		jpPaginas = new JPanel();
-		jpPaginas.setBackground(new Color(254, 160, 184));
+		jpPaginas.setBackground(new Color(213, 186, 174));
 		jpPaginas.setBounds(22, 0, 211, 488);
 		contentPane.add(jpPaginas);
 		jpPaginas.setVisible(true);
@@ -158,7 +159,7 @@ public class ViewPrincipal extends JFrame {
 		jbProdutos.setBounds(34, 132, 141, 60);
 		jpPaginas.add(jbProdutos);
 		
-		JButton jbUsuarios = new JButton("Usuarios");
+		jbUsuarios = new JButton("Usuarios");
 		jbUsuarios.setIcon(new ImageIcon(ViewPrincipal.class.getResource("/imagens/icons8-usuário-32.png")));
 		jbUsuarios.setBackground(new Color(255, 230, 236));
 		jbUsuarios.addActionListener(new ActionListener() {
@@ -251,5 +252,8 @@ public class ViewPrincipal extends JFrame {
 	
 	private void setarUsuario() {
 		jlUsuario.setText(ModelSessaoUsuario.nome);
+		if (!jlUsuario.getText().equals("Administrador")) {
+			jbUsuarios.setEnabled(false);
+		}
 	}
 }

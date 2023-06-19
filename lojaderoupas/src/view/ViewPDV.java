@@ -47,6 +47,10 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import view.ViewPagamentoPDV;
+import view.ViewProdutosPDV;
+import javax.swing.JButton;
+import model.ModelClientes;
+import controller.ControllerClientes;
 
 public class ViewPDV extends JFrame {
 
@@ -59,6 +63,9 @@ public class ViewPDV extends JFrame {
 	private ModelVendas modelVendas = new ModelVendas();
 	private ControllerVendas controllerVendas = new ControllerVendas();
 	private ArrayList<ModelVendasProdutos> listaModelVendasProdutos = new ArrayList<>();
+	private ModelClientes modelClientes = new ModelClientes();
+	private ControllerClientes controllerClientes = new ControllerClientes();
+	private ArrayList<ModelClientes> listaModelClientes = new ArrayList<>();
 	private ModelVendasProdutos modelVendasProdutos = new ModelVendasProdutos();
 	private Datas datas = new Datas();
 	private Mascaras mascaras = new Mascaras();
@@ -68,8 +75,10 @@ public class ViewPDV extends JFrame {
 	private JLabel jlOperador;
 	private JLabel jlCaixa;
 	private JLabel jlStatus;
+	private JButton jbtPagamento;
 	int quantidade;
 	private ViewPagamentoPDV viewPagamentoPDV;
+	private ViewProdutosPDV viewProdutosPDV;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -147,12 +156,12 @@ public class ViewPDV extends JFrame {
 					DefaultTableModel modelo = (DefaultTableModel) jtProdutos.getModel();
 					int linha = Integer.parseInt(JOptionPane.showInputDialog("Informe o item que deseja excluir."));
 					modelo.removeRow(linha-1);
+					verificarConteudo();
 					jtfValorTotal.setText(somarValorTotal()+"");
 					for (int i = 0; i < quantLinha; i++) {
 						modelo.setValueAt(i+1, i, 0);
 					}
-				}
-				
+				}	
 			}
 		});
 		jmiExcluirProduto.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F2, 0));
@@ -192,13 +201,23 @@ public class ViewPDV extends JFrame {
 		JMenuItem jmiPesquisarProdutos = new JMenuItem("Pesquisar Produtos");
 		jmiPesquisarProdutos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				viewProdutosPDV = new ViewProdutosPDV(ViewPDV.this);
+		        viewProdutosPDV.setVisible(true);
 			}
 		});
 		jmiPesquisarProdutos.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F5, 0));
 		mnNewMenu.add(jmiPesquisarProdutos);
+		
+		JMenuItem jmiCancelarVenda = new JMenuItem("Cancelar Venda");
+		jmiCancelarVenda.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				limparTela();
+			}
+		});
+		jmiCancelarVenda.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F6, 0));
+		mnNewMenu.add(jmiCancelarVenda);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(255, 213, 223));
+		contentPane.setBackground(new Color(213, 186, 174));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
@@ -306,30 +325,30 @@ public class ViewPDV extends JFrame {
 		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		jtfValorTotal = new JTextField();
-		jtfValorTotal.setBounds(10, 41, 220, 105);
+		jtfValorTotal.setBounds(10, 41, 220, 79);
 		jtfValorTotal.setEditable(false);
 		jtfValorTotal.setFont(new Font("Tahoma", Font.BOLD, 32));
 		jtfValorTotal.setColumns(10);
 		
 		JLabel lblNewLabel_5 = new JLabel("Comandos");
-		lblNewLabel_5.setBounds(10, 157, 220, 22);
+		lblNewLabel_5.setBounds(10, 131, 220, 22);
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblNewLabel_5.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JLabel lblNewLabel_6 = new JLabel("F3 - Quantidade");
-		lblNewLabel_6.setBounds(10, 214, 220, 33);
+		lblNewLabel_6.setBounds(10, 188, 220, 33);
 		lblNewLabel_6.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JLabel lblNewLabel_6_1 = new JLabel("F4 - Finalizar Venda");
-		lblNewLabel_6_1.setBounds(10, 245, 220, 33);
+		lblNewLabel_6_1.setBounds(10, 219, 220, 33);
 		lblNewLabel_6_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JLabel lblNewLabel_6_2 = new JLabel("F5 - Pesquisar Produtos");
-		lblNewLabel_6_2.setBounds(10, 278, 220, 33);
+		lblNewLabel_6_2.setBounds(10, 252, 220, 33);
 		lblNewLabel_6_2.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
-		JLabel lblNewLabel_6_2_1 = new JLabel("F9 - Sair");
-		lblNewLabel_6_2_1.setBounds(10, 309, 220, 33);
+		JLabel lblNewLabel_6_2_1 = new JLabel("F6 - Cancelar Venda");
+		lblNewLabel_6_2_1.setBounds(10, 283, 220, 33);
 		lblNewLabel_6_2_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
@@ -365,7 +384,7 @@ public class ViewPDV extends JFrame {
 		);
 		
 		JLabel lblNewLabel_6_3 = new JLabel("F2 - Excluir Produto");
-		lblNewLabel_6_3.setBounds(10, 185, 220, 28);
+		lblNewLabel_6_3.setBounds(10, 159, 220, 28);
 		lblNewLabel_6_3.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		panel_3.setLayout(null);
 		panel_3.add(lblNewLabel_4);
@@ -376,6 +395,42 @@ public class ViewPDV extends JFrame {
 		panel_3.add(lblNewLabel_6_2_1);
 		panel_3.add(lblNewLabel_6_2);
 		panel_3.add(lblNewLabel_6_3);
+		
+		jbtPagamento = new JButton("PAGAMENTO");
+		jbtPagamento.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+		    		viewPagamentoPDV.setValorTotal(Float.parseFloat(jtfValorTotal.getText()));
+			        viewPagamentoPDV.setarValorTotal();
+			        viewPagamentoPDV.setVisible(true);
+			        viewPagamentoPDV.addWindowListener(new WindowAdapter() {
+			            @Override
+			            public void windowClosed(WindowEvent e) {
+			                System.out.println(viewPagamentoPDV.getValorTotal());
+			                System.out.println(viewPagamentoPDV.getValorRecebido());
+			                System.out.println(viewPagamentoPDV.getDesconto());
+			                System.out.println(viewPagamentoPDV.getTroco());
+			                System.out.println(viewPagamentoPDV.getFormaPagamento());
+					        if (viewPagamentoPDV.isPago()) {
+					        	finalizarVenda();
+					        }
+			            }
+			        });
+		    	} catch (Exception e1) {
+		    		JOptionPane.showMessageDialog(ViewPDV.this, "Nenhum produto adicionado!");
+		    	}
+			}
+		});
+		
+		jbtPagamento.setEnabled(false);
+		jbtPagamento.setFont(new Font("Tahoma", Font.BOLD, 22));
+		jbtPagamento.setBounds(10, 424, 220, 71);
+		panel_3.add(jbtPagamento);
+		
+		JLabel lblNewLabel_6_2_1_1 = new JLabel("F9 - Sair");
+		lblNewLabel_6_2_1_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblNewLabel_6_2_1_1.setBounds(10, 315, 220, 33);
+		panel_3.add(lblNewLabel_6_2_1_1);
 		GroupLayout gl_panel_2 = new GroupLayout(panel_2);
 		gl_panel_2.setHorizontalGroup(
 			gl_panel_2.createParallelGroup(Alignment.LEADING)
@@ -416,8 +471,9 @@ public class ViewPDV extends JFrame {
 			jtfValorTotal.setText(somarValorTotal()+"");
 			jtfCodigoProduto.setText("");
 			quantidade = 1;
+			verificarConteudo();
 		} catch (Exception e1) {
-			JOptionPane.showMessageDialog(ViewPDV.this, "Informe o código númerico do produto!", "ERRO", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(ViewPDV.this, "Produto não encontrado!", "ERRO", JOptionPane.ERROR_MESSAGE);
 			jtfCodigoProduto.setText("");
 		}
 	}
@@ -483,5 +539,15 @@ public class ViewPDV extends JFrame {
 		jlStatus.setText("CAIXA LIVRE");
 		jlStatus.setForeground(new Color(255, 204, 20));
 		jtfCodigoProduto.requestFocus();
+		jbtPagamento.setEnabled(false);
+	}
+	
+	private void verificarConteudo() {
+		DefaultTableModel modelo = (DefaultTableModel) jtProdutos.getModel();
+	    if (modelo.getRowCount() == 0) {
+	        jbtPagamento.setEnabled(false);
+	    } else {
+	        jbtPagamento.setEnabled(true);
+	    }	
 	}
 }
