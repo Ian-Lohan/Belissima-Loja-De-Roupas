@@ -232,6 +232,12 @@ public class ViewPDV extends JFrame {
 				"Item", "C\u00F3digo", "Nome", "Quantidade", "Valor Un\u00EDt.", "Valor Total"
 			}
 		) {
+			Class[] columnTypes = new Class[] {
+				Object.class, Object.class, Object.class, Integer.class, Object.class, Object.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
 			boolean[] columnEditables = new boolean[] {
 				false, false, false, false, false, false
 			};
@@ -504,8 +510,8 @@ public class ViewPDV extends JFrame {
 			Logger.getLogger(ViewPDV.class.getName()).log(Level.SEVERE, null, e1);
 		}
 		modelVendas.setVenValorBruto(mascaras.converterArredondar2CasaPontoDouble(Double.parseDouble(jtfValorTotal.getText())));
-		modelVendas.setVenValorLiquido(mascaras.converterArredondar2CasaPontoDouble(viewPagamentoPDV.getDesconto()));
-		modelVendas.setVenDesconto(mascaras.converterArredondar2CasaPontoDouble(viewPagamentoPDV.getValorTotal()));
+		modelVendas.setVenValorLiquido(mascaras.converterArredondar2CasaPontoDouble(viewPagamentoPDV.getValorRecebido()));
+		modelVendas.setVenDesconto(mascaras.converterArredondar2CasaPontoDouble(viewPagamentoPDV.getDesconto()));
 		codigoVenda = controllerVendas.salvarVendaController(modelVendas);
 		for (int i = 0; i < cont; i++) {
         	codigoProduto = (int) jtProdutos.getValueAt(i, 1);
@@ -516,10 +522,12 @@ public class ViewPDV extends JFrame {
     		modelVendasProdutos.setVenProValor((double) jtProdutos.getValueAt(i, 4));
     		modelVendasProdutos.setVenProQuantidade((int) jtProdutos.getValueAt(i, 3));
     		modelProdutos.setIdProduto(codigoProduto);
-    		int quantidadeVendida = ((Integer) jtProdutos.getValueAt(i, 3)).intValue();
+    		int quantidadeVendida = ((int) jtProdutos.getValueAt(i, 3));
     		ModelProdutos produto = controllerProdutos.retornarProdutoController(codigoProduto);
-    		int estoqueAtualizado = produto.getProEstoque() - quantidadeVendida;
-    		produto.setProEstoque(estoqueAtualizado);
+    		int estoqueNovo = produto.getProEstoque() - quantidadeVendida;
+    		System.out.println(estoqueNovo);
+    		produto.setProEstoque(estoqueNovo);
+    		modelProdutos.setProEstoque(estoqueNovo);
     		listaModelVendasProdutos.add(modelVendasProdutos);
     		listaModelProdutos.add(modelProdutos);
     	}

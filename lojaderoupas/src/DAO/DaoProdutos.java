@@ -18,8 +18,7 @@ public class DaoProdutos extends ConexaoMySql {
 			+ ") VALUES ("
 			+ "'" + pModelProdutos.getProNome() + "',"
 			+ "'" + pModelProdutos.getProValor() + "',"
-			+ "'" + pModelProdutos.getProEstoque() + "'"
-			+ ");"
+			+ "'" + pModelProdutos.getProEstoque() + "');"
 			);
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -34,6 +34,8 @@ import java.awt.event.FocusEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import util.Mascaras;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class ViewPagamentoPDV extends JDialog {
 
@@ -103,9 +105,16 @@ public class ViewPagamentoPDV extends JDialog {
 		}
 		{
 			jtfDesconto = new JTextField();
+			jtfDesconto.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyReleased(KeyEvent e) {
+					jtfDesconto.setText(mascaras.converterVirgulaParaPonto(jtfDesconto.getText()));
+					calcularPagamento();
+				}
+			});
 			jtfDesconto.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					if (recebido >= pagar) {
+					if (pagar <= 0.00) {
 					    jbConfirmar.requestFocus();
 					} else {
 						jtfRecebido.requestFocus();
@@ -211,9 +220,20 @@ public class ViewPagamentoPDV extends JDialog {
 		}
 		{
 			jtfRecebido = new JTextField();
+			jtfRecebido.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyReleased(KeyEvent e) {
+					jtfRecebido.setText(mascaras.converterVirgulaParaPonto(jtfRecebido.getText()));
+					calcularPagamento();
+				}
+			});
 			jtfRecebido.addFocusListener(new FocusAdapter() {
 				@Override
 				public void focusLost(FocusEvent e) {
+					if (jtfRecebido.getText().isEmpty()) {
+						jtfRecebido.setText("0");
+					}
+					jtfRecebido.setText(mascaras.converterVirgulaParaPonto(jtfRecebido.getText()));
 					calcularPagamento();
 				}
 			});
@@ -243,7 +263,6 @@ public class ViewPagamentoPDV extends JDialog {
 	
 	public void setarValorTotal() {
 		this.jtfSubtotal.setText(this.valorTotal + "");
-		this.jlValorTotal.setText(this.valorTotal + "");
 	}
 	
 	public void confirmarVenda() {
@@ -296,24 +315,32 @@ public class ViewPagamentoPDV extends JDialog {
 	        recebido = Float.parseFloat(jtfRecebido.getText());
 	    }
 	    
-	    pagar = total - desconto;
+	    pagar = total - (desconto + recebido);
 
-	    if (recebido >= pagar) {
-	        troco = recebido - pagar;
+	    if (pagar <= 0) {
+	    	troco = Math.abs(pagar);
 	        jlValorTotal.setText("0.00");
 	        jlTroco.setText(String.format("%.2f", troco));
 	        jbConfirmar.setEnabled(true);
+			jlValorTotal.setText(mascaras.converterVirgulaParaPonto(jlValorTotal.getText()));
+			jlTroco.setText(mascaras.converterVirgulaParaPonto(jlTroco.getText()));
 	    } else {
 	        troco = 0;
 	        jlValorTotal.setText(String.format("%.2f", pagar));
 	        jlTroco.setText(String.format("%.2f", troco));
 	        jbConfirmar.setEnabled(false);
+	        jlValorTotal.setText(mascaras.converterVirgulaParaPonto(jlValorTotal.getText()));
+			jlTroco.setText(mascaras.converterVirgulaParaPonto(jlTroco.getText()));
 	    }
 	}
 	
 	private void limparCampos() {
 		jcbPagamento.setSelectedItem(0);
 		jtfDesconto.setText("0");
+		jtfRecebido.setText("0");
+		jlValorTotal.setText("0.0");
+		jlTroco.setText("0.0");
+		jbConfirmar.setEnabled(false);
 	}
 	
 

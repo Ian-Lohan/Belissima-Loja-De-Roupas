@@ -351,10 +351,12 @@ public class ViewVendas extends JFrame {
             			modelProdutos.setIdProduto(codigoProduto);
             			int quantidadeVendida = ((Integer) jtProdutosVendas.getValueAt(i, 2)).intValue();
             			ModelProdutos produto = controllerProdutos.retornarProdutoController(codigoProduto);
-            			int estoqueAtualizado = produto.getProEstoque() - quantidadeVendida;
-            			produto.setProEstoque(estoqueAtualizado);
-            			listaModelVendasProdutos.add(modelVendasProdutos);
-            			listaModelProdutos.add(modelProdutos);
+            			int estoqueNovo = produto.getProEstoque() - quantidadeVendida;
+                		System.out.println(estoqueNovo);
+                		produto.setProEstoque(estoqueNovo);
+                		modelProdutos.setProEstoque(estoqueNovo);
+                		listaModelVendasProdutos.add(modelVendasProdutos);
+                		listaModelProdutos.add(modelProdutos);
             		}
             		if(controllerVendasProdutos.salvarListaVendaProdutosController(listaModelVendasProdutos)) {
             			controllerProdutos.alterarEstoqueProdutoController(listaModelProdutos);

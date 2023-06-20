@@ -37,7 +37,8 @@ public class ControllerProdutos {
 	public ArrayList<ModelProdutos> retornarListaProdutoController() {
 		return this.daoProdutos.retornarListaProdutosDAO();
 	}
-
+	
+    // Recupera Produtos ao Excluir Venda
 	public boolean alterarEstoqueProdutoController(ArrayList<ModelProdutos> pListaModelProdutos) {
 		return this.daoProdutos.alterarEstoqueProdutoDAO(pListaModelProdutos); 
 	}

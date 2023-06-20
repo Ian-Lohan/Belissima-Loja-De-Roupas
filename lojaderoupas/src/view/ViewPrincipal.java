@@ -33,9 +33,6 @@ public class ViewPrincipal extends JFrame {
 	private JLabel jlDataHora;
 	private JButton jbUsuarios;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -117,6 +114,16 @@ public class ViewPrincipal extends JFrame {
 		jmiVendas.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, InputEvent.CTRL_DOWN_MASK | InputEvent.ALT_DOWN_MASK));
 		jmiVendas.setIcon(new ImageIcon(ViewPrincipal.class.getResource("/imagens/icons8-vendas-totais-18.png")));
 		mnNewMenu_2.add(jmiVendas);
+		
+		JMenuItem mntmNewMenuItem = new JMenuItem("PDV");
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new ViewPDV().setVisible(true);
+			}
+		});
+		mntmNewMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, InputEvent.CTRL_DOWN_MASK | InputEvent.ALT_DOWN_MASK));
+		mntmNewMenuItem.setIcon(new ImageIcon(ViewPrincipal.class.getResource("/imagens/icons8-carrinho-18.png")));
+		mnNewMenu_2.add(mntmNewMenuItem);
 		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
