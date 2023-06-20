@@ -97,7 +97,7 @@ Utilize o arquivo belissima.sql para importar o banco de dados.
 Fizemos o programa de uma forma que roda em qualquer dispositivo Windows com acesso ao banco de dados e que possua o Java instalado.
 
 ## Status
-O projeto está: _Finalizado (com possíveis atualizações futuras)_
+O projeto está: _Finalizado (com possíveis atualizações futuras e correções de bugs)_
 
 ## Licença
 >Leia o arquivo de licença [aqui](https://github.com/Ian-Lohan/Projeto-Loja-de-Roupas/blob/master/LICENSE.md)
